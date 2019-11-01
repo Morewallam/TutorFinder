@@ -11,3 +11,7 @@ margin: 10px;
 border: solid 1px black;
 margin-bottom: 15px;
 }
+
+.form-inline{
+    float: left;
+}
