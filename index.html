@@ -8,24 +8,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+
     <meta charset="utf-8" />
     <title>Landing Page</title>
     <style>
-        .pp{
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 50%;
-            float: left;
-        }
+      .pp {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+        float: left;
+      }
+      
     </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">
         <img
-          src="/docs/4.2/assets/brand/bootstrap-solid.svg"
+          src="/Images/Logo.png"
           width="30"
           height="30"
           class="d-inline-block align-top"
@@ -69,22 +70,31 @@
         </ul>
       </div>
     </nav>
+    <form class="form-inline">
+      <i class="fas fa-search" aria-hidden="true"></i>
+      <input
+        class="form-control form-control-sm ml-3 w-75"
+        type="text"
+        placeholder="Search"
+        aria-label="Search"
+      />
+    </form>
     <h2>Tutors</h2>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <img src="Images/blank_pp.png" class="pp">
-                <button type="button" class="btn btn-link">Bob</button>
-            </div>
-            <div class="col-lg-4">
-                <img src="Images/blank_pp.png" class="pp">
-                <button type="button" class="btn btn-link">Joe</button>
-            </div>
-            <div class="col-lg-4">
-                <img src="Images/blank_pp.png" class="pp">
-                <button type="button" class="btn btn-link">Jim</button>
-            </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <img src="Images/blank_pp.png" class="pp" />
+          <button type="button" class="btn btn-link">Bob</button>
         </div>
+        <div class="col-lg-4">
+          <img src="Images/blank_pp.png" class="pp" />
+          <button type="button" class="btn btn-link">Joe</button>
+        </div>
+        <div class="col-lg-4">
+          <img src="Images/blank_pp.png" class="pp" />
+          <button type="button" class="btn btn-link">Jim</button>
+        </div>
+      </div>
     </div>
 
     <h2>header</h2>
