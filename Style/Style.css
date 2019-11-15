@@ -19,3 +19,12 @@ margin-bottom: 15px;
 .about-us{
     background-color: #C6D8D3;
 }
+
+.ppLarge{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    float: left;
+    margin: 20px;
+}
