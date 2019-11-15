@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <meta charset="utf-8" />
+    <title>Booking Page</title>
+    <link rel="stylesheet" type="text/css" href="Style/Style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img
+          src="Images/Logo.png"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        Tutor Finder
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="./index.html"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./tutorSelector.html">Find a Tutor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <form>
+      <div class="form-row">
+          <div class="form-group col-md-4">
+          <label for="formGroupExampleInput">Tutor</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Readonly input here…"
+            readonly
+          />
+          </div>
+        
+          <div class="form-group col-md-2">
+          <label for="formGroupExampleInput">Price</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Readonly input here…"
+            readonly
+          />
+          </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="formGroupExampleInput">Subject</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="formGroupExampleInput2">Course</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="datePicker">Date</label>
+          <input type="date" id="datePicker" />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="TimePicker">Time</label>
+          <input type="time" id="TimePicker" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="inputCity">City</label>
+          <input type="text" class="form-control" id="inputCity" />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputState">State</label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Zip</label>
+          <input type="text" class="form-control" id="inputZip" />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </body>
+</html>
