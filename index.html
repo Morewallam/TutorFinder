@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">
       <img src="Images/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
       Tutor Finder
@@ -39,33 +39,36 @@
       </ul>
     </div>
   </nav>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
-      Prefrences
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      <button class="dropdown-item" type="button">Price</button>
-      <button class="dropdown-item" type="button">Subject</button>
-    </div>
-    <form class="form-inline">
-      <i class="fas fa-search" aria-hidden="true"></i>
-      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
-    </form>
   </div>
-  <div class="about-us">
-    <h2>About Us:</h2>
+  <div id="about-us">
+    <h2 id="about-title">About Us</h2>
     <p>We created Tutor Finder to help the students who been having problems in finding tutors who would fit their
-      needs<br>
+      needs
       and to find the best possible person to further their understanding in whatever subject they’re struggling in.<br>
       We’re dedicated in fixing this issue and helping our fellow students on their academic journeys.</p>
   </div>
-  <h2>Tutors</h2>
+  
+
+  <h2 id="tutors-title">Tutors</h2>
   <div class="container">
+      <form class="form-inline">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
+        </form>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Prefrences
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button">Price</button>
+            <button class="dropdown-item" type="button">Subject</button>
+          </div>
+         </div>
     <div class="row">
       <div class="col-lg-4">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link">Bob</button>
+        <button type="button" class="butn btn btn-link" >Bob</button>
         <div class="bio">
           <div>Price: $25/h</div>
           <div>Subjects: Math, Science</div>
@@ -73,7 +76,7 @@
       </div>
       <div class="col-lg-4">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link">Joe</button>
+        <button type="button" class="butn btn btn-link" >Joe</button>
         <div class="bio">
           <div>Price: $30/h</div>
           <div>Subjects: Socials, English</div>
@@ -81,7 +84,7 @@
       </div>
       <div class="col-lg-4">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link">Jim</button>
+        <button type="button" class=" butn btn btn-link" >Jim</button>
         <div class="bio">
           <div>Price: $25/h</div>
           <div>Subjects: French, Spansish</div>
