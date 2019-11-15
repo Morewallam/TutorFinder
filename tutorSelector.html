@@ -10,13 +10,46 @@
   <meta charset="utf-8" />
   <title>Tutor List</title>
   <link rel="stylesheet" type="text/css" href="Style/Style.css" />
+
+  <!------------------------------------------------------------------------------>
+  <!-- Add Firebase products that you want to use                               -->
+  <!------------------------------------------------------------------------------>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <!------------------------------------------------------------------------------>
+  <!-- Optional styles and scripts of your own                                  -->
+  <!------------------------------------------------------------------------------>
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="scripts/script.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDwW0SxAa7rQNtirqtI7U1UQkOAudflZWQ",
+      authDomain: "project-8839510588664178667.firebaseapp.com",
+      databaseURL: "https://project-8839510588664178667.firebaseio.com",
+      projectId: "project-8839510588664178667",
+      storageBucket: "project-8839510588664178667.appspot.com",
+      messagingSenderId: "1096535957963",
+      appId: "1:1096535957963:web:258193868d1cfda790964e",
+      measurementId: "G-WS6MMHK5X8"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+    var db = firebase.firestore();
+
+  </script>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
-      <img src="Images/Logo.png" width="30" height="30" class="d-inline-block align-top"
-        alt="" />
+      <img src="Images/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
       Tutor Finder
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -32,58 +65,130 @@
           <a class="nav-link" href="./tutorSelector.html">Find a Tutor<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+          <a class="nav-link" href="./login.html">Login</a>
         </li>
       </ul>
     </div>
   </nav>
   <form class="form-inline">
-      <i class="fas fa-search" aria-hidden="true"></i>
-      <input
-        class="form-control form-control-sm ml-3 w-75"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-    </form>
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Prefrences
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button class="dropdown-item" type="button">Price</button>
-        <button class="dropdown-item" type="button">Subject</button>
-      </div>
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
+  </form>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      Prefrences
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <button class="dropdown-item" type="button">Price</button>
+      <button class="dropdown-item" type="button">Subject</button>
     </div>
+  </div>
   <h2>Tutors</h2>
   <div class="container">
     <div class="row">
       <div class="col-lg-4">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link">Bob</button>
+        <button type="button" class="btn btn-link"><span id="name1"></span></button>
         <div class="bio">
-          <div>Price: $25/h</div>
-          <div>Subjects: Math, Science</div>
+          <div><span id="price1"></span></div>
+          <div><span id="subject1"></span></div>
         </div>
       </div>
       <div class="col-lg-4">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link">Joe</button>
+        <button type="button" class="btn btn-link"><span id="name2"></span></button>
         <div class="bio">
-          <div>Price: $30/h</div>
-          <div>Subjects: Socials, English</div>
+          <div><span id="price2"></span></div>
+          <div><span id="subject2"></span></div>
         </div>
       </div>
       <div class="col-lg-4">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link">Jim</button>
+        <button type="button" class="btn btn-link"><span id="name3"></span></button>
         <div class="bio">
-          <div>Price: $25/h</div>
-          <div>Subjects: French, Spansish</div>
+          <div><span id="price3"></span></div>
+          <div><span id="subject3"></span></div>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+
+    //first tutor 
+    db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
+      .onSnapshot(function (c) {
+        // console.log("Current data: ", c.data());
+        document.getElementById("name1").innerHTML = c.data().name;
+      })
+    db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
+      .onSnapshot(function (c) {
+        // console.log("Current data: ", c.data());
+        document.getElementById("price1").innerHTML = "Price: $" + c.data().price + "/h";
+      })
+    db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
+      .onSnapshot(function (c) {
+        // console.log("Current data: ", c.data());
+        document.getElementById("subject1").innerHTML = "Subject: " + c.data().subject;
+      })
+
+    //second tutor
+    db.collection("Tutors").doc("gIijILYQZDqxVga5j6Bj")
+      .onSnapshot(function (c) {
+        // console.log("Current data: ", c.data());
+        document.getElementById("name2").innerHTML = c.data().name;
+      })
+    db.collection("Tutors").doc("gIijILYQZDqxVga5j6Bj")
+      .onSnapshot(function (c) {
+        // console.log("Current data: ", c.data());
+        document.getElementById("price2").innerHTML = "Price: $" + c.data().price + "/h";
+      })
+    db.collection("Tutors").doc("gIijILYQZDqxVga5j6Bj")
+      .onSnapshot(function (c) {
+        // console.log("Current data: ", c.data());
+        document.getElementById("subject2").innerHTML = "Subject: " + c.data().subject;
+      })
+
+    //third tutor
+    db.collection("Tutors").doc("FdV0PVNcHpKN23JZHNiN")
+      .onSnapshot(function (c) {
+        // console.log("Current data: ", c.data());
+        document.getElementById("name3").innerHTML = c.data().name;
+      })
+    db.collection("Tutors").doc("FdV0PVNcHpKN23JZHNiN")
+      .onSnapshot(function (c) {
+        // console.log("Current data: ", c.data());
+        document.getElementById("price3").innerHTML = "Price: $" + c.data().price + "/h";
+      })
+    db.collection("Tutors").doc("FdV0PVNcHpKN23JZHNiN")
+      .onSnapshot(function (c) {
+        // console.log("Current data: ", c.data());
+        document.getElementById("subject3").innerHTML = "Subject: " + c.data().subject;
+      })
+// function displayTutor() {
+//   db.collection("Tutors")
+//   .get() //getting collection of document
+//   .then(function(snap) { 
+//     console.log(snap);
+//     snap.forEach(function(doc) {
+//       console.log(doc.data());
+//       var n = doc.data().name;
+//       console.log(n);
+
+//       var para = document.createElement("div");
+//       document.body.appendChild(para);
+//       var node = document.createTextNode(node);
+//       para.appendChild(node);
+
+//     });
+
+//   });
+// }
+// displayTutors();
+
+  </script>
+
 </body>
 
 </html>
