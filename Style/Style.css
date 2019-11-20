@@ -6,7 +6,6 @@ body{
     background-color: #FDF0D5;
 }
 
-
 .pp {
 width: 50px;
 height: 50px;
@@ -14,6 +13,15 @@ object-fit: cover;
 border-radius: 50%;
 float: left;
 margin: 10px;
+}
+
+.ppLarge{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    float: left;
+    margin: 20px;
 }
 
 .col-lg-4 {
@@ -35,7 +43,6 @@ margin-bottom: 15px;
     background-color: white;
 }
 
-<<<<<<< HEAD
 #about-title{
     text-align: center;
 }
@@ -59,13 +66,4 @@ margin-bottom: 15px;
 
 #tutors-title{
     margin-left: 30px;
-=======
-.ppLarge{
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-    float: left;
-    margin: 20px;
->>>>>>> 6527eab58a5d39886f96dd35f37c52a6f959352e
 }
