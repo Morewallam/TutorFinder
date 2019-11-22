@@ -35,7 +35,6 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       var db = firebase.firestore();
-      
     </script>
 
     <meta charset="utf-8" />
@@ -89,7 +88,7 @@
             class="form-control"
             type="text"
             placeholder="Readonly input here…"
-            id ="tutorName"
+            id="tutorName"
             readonly
           />
         </div>
@@ -109,7 +108,8 @@
         <div class="form-group col-md-4">
           <label for="formGroupExampleInput">Subject</label>
           <select class="form-control" id="formGroupExampleInput">
-            <option>Math </option><!-- Put in the subjects from the tutors profile-->
+            <option>Math </option
+            ><!-- Put in the subjects from the tutors profile-->
           </select>
         </div>
         <div class="form-group col-md-4">
@@ -156,8 +156,8 @@
     </form>
 
     <script>
+     
       $("#myform").submit(function(event) {
-
         event.preventDefault();
         let tutor = $("#tutorName").val();
         let price = $("#priceId").val();
@@ -170,22 +170,50 @@
         let state = $("#inputState").val();
         let zip = $("#inputZip").val();
 
-        console.log(city);
-
-        var user =firebase.auth().currentUser;
-       
-        db.collection("appointments").doc().set({
-            date: date,
-            location: location,
-            price: price,
-            student: user,
-            time: time,
-            tutor: tutor
-        })
-
+        function setDatabase(_callback){
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              db.collection("appointments")
+              .doc()
+              .set({
+                date: date,
+                location: location,
+                price: price,
+                student: user.uid,
+                time: time,
+                tutor: tutor,
+                subject: subject,
+                course: course,
+              });
+              document.getElementById("myform").reset();
+            } else {
+              alert("please Log-in :)");
+              window.location.href = "./index.html"
+           }
+          });
+          _callback();
+       }
+        function locationChaange(){
+          setDatabase(function(){
+            //window.location.href = "./login.html";
+          });
+           
+        }
+        locationChaange();
         
-       
+          
+          
       });
+
+
+      firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            console.log("Logged in as"+ user);
+          } else {
+            console.log("not logged in");
+          }
+       });
+     
     </script>
   </body>
 </html>
