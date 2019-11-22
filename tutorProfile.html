@@ -91,6 +91,7 @@
     <h5><span id="price"></span></h5>
     <h5><span id="subject"></span></h5>
     <h5><span id="rating"></span></h5>
+    <h5><span id="contact"></span></h5>
     <!-- <input type="button" value="Book Appoitment" href="./Booking.html" /> -->
     <!-- <button class="nav-link" type="button" href="./Booking.html" >Book Appoitment</button> -->
     <button type="button" class="btn btn-link"><a href="./Booking.html">Book Appoitment</a></button>
@@ -118,6 +119,11 @@
             .onSnapshot(function (c) {
                 // console.log("Current data: ", c.data());
                 document.getElementById("rating").innerHTML = "Rating: " + c.data().rating;
+            })
+        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
+            .onSnapshot(function (c) {
+                // console.log("Current data: ", c.data());
+                document.getElementById("rating").innerHTML = "Contact: " + c.data().contact;
             })
     </script>
 
