@@ -91,25 +91,25 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-lg-4 first">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a href="./tutorProfile.html"><span class="name"></span></a></button>
+        <button type="button" class="btn btn-link"><a id="first" href="./tutorProfile.html"><span class="name"></span></a></button>
         <div class="bio">
           <div><span class="price"></span></div>
           <div><span class="subject"></span></div>
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-4 second">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a href="./tutorProfile.html"><span class="name"></span></a></button>
+        <button type="button" class="btn btn-link"><a id="second"href="./tutorProfile.html"><span class="name"></span></a></button>
         <div class="bio">
           <div><span class="price"></span></div>
           <div><span class="subject"></span></div>
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-4 third">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a href="./tutorProfile.html"><span class="name"></span></a></button>
+        <button type="button" class="btn btn-link"><a id="third" href="./tutorProfile.html"><span class="name"></span></a></button>
         <div class="bio">
           <div><span class="price"></span></div>
           <div><span class="subject"></span></div>
@@ -147,11 +147,34 @@
             tutorsName[i].innerHTML = doc.data().name;
             tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
             tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
-            
-            
               i++;
           });
           i==0;
+        });
+
+        $("#first").click(function(event){
+          event.preventDefault();
+          queryString = document.getElementsByClassName("name");
+          
+          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+
+
+        });
+        $("#second").click(function(event){
+          event.preventDefault();
+          queryString = document.getElementsByClassName("name");
+          
+          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+
+
+        });
+        $("#third").click(function(event){
+          event.preventDefault();
+          queryString = document.getElementsByClassName("name");
+          
+          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+
+
         });
 
      </script>
