@@ -116,77 +116,29 @@
 
   <script>
 
-    //first tutor 
-    db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("name1").innerHTML = c.data().name;
-      })
-    db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("price1").innerHTML = "Price: $" + c.data().price + "/h";
-      })
-    db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("subject1").innerHTML = "Subject: " + c.data().subject;
-      })
+var tutorsName = document.getElementsByClassName("name");
+      var tutorsPrice = document.getElementsByClassName("price");
+      var tutorsSubject = document.getElementsByClassName("subject");
+      i=0;
+      //first tutor 
+      db.collection("Tutors")
+        .orderBy("rating")
+        .limit(3)
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            tutorsName[i].innerHTML = doc.data().name;
+            tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
+            tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
+            
+            
+              i++;
+          });
+          i==0;
+        });
 
-    //second tutor
-    db.collection("Tutors").doc("gIijILYQZDqxVga5j6Bj")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("name2").innerHTML = c.data().name;
-      })
-    db.collection("Tutors").doc("gIijILYQZDqxVga5j6Bj")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("price2").innerHTML = "Price: $" + c.data().price + "/h";
-      })
-    db.collection("Tutors").doc("gIijILYQZDqxVga5j6Bj")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("subject2").innerHTML = "Subject: " + c.data().subject;
-      })
 
-    //third tutor
-    db.collection("Tutors").doc("FdV0PVNcHpKN23JZHNiN")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("name3").innerHTML = c.data().name;
-      })
-    db.collection("Tutors").doc("FdV0PVNcHpKN23JZHNiN")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("price3").innerHTML = "Price: $" + c.data().price + "/h";
-      })
-    db.collection("Tutors").doc("FdV0PVNcHpKN23JZHNiN")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("subject3").innerHTML = "Subject: " + c.data().subject;
-      })
-// function displayTutor() {
-//   db.collection("Tutors")
-//   .get() //getting collection of document
-//   .then(function(snap) { 
-//     console.log(snap);
-//     snap.forEach(function(doc) {
-//       console.log(doc.data());
-//       var n = doc.data().name;
-//       console.log(n);
-
-//       var para = document.createElement("div");
-//       document.body.appendChild(para);
-//       var node = document.createTextNode(node);
-//       para.appendChild(node);
-
-//     });
-
-//   });
-// }
-// displayTutors();
-
+}
   </script>
 
 </body>
