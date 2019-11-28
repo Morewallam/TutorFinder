@@ -1,3 +1,4 @@
+
 body{
     background-color: #C6D8D3;
 }
@@ -35,7 +36,6 @@ margin-bottom: 15px;
     background-color: white;
 }
 
-<<<<<<< HEAD
 #about-title{
     text-align: center;
 }
@@ -57,9 +57,12 @@ margin-bottom: 15px;
     color: tomato;
 }
 
-#tutors-title{
-    margin-left: 30px;
-=======
+.small-title{
+    margin: 30px;
+    padding-left: 12px;
+    width: 230px;
+}
+
 .ppLarge{
     width: 200px;
     height: 200px;
@@ -67,5 +70,42 @@ margin-bottom: 15px;
     border-radius: 50%;
     float: left;
     margin: 20px;
->>>>>>> 6527eab58a5d39886f96dd35f37c52a6f959352e
+}
+
+
+#bob{
+    
+    background-color: #FDF0D5;
+    border: 1px black solid;
+    margin-left: 15px;
+    margin-right: 20px;
+    padding: 20px;
+    margin-top: 10px;   
+}
+
+#name{
+    color: tomato;
+}
+
+.navbar-brand{
+    float: left;
+}
+
+
+.form-control{
+    background-color: #FDF0D5;
+    width: 300px;
+}
+
+#TimePicker{
+    background-color: #FDF0D5;
+}
+
+#datePicker{
+    background-color: #FDF0D5;
+}
+
+.submit
+{
+    margin: 10px;
 }
