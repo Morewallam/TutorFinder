@@ -94,7 +94,7 @@
     <h5><span id="contact"></span></h5>
     <!-- <input type="button" value="Book Appoitment" href="./Booking.html" /> -->
     <!-- <button class="nav-link" type="button" href="./Booking.html" >Book Appoitment</button> -->
-    <button type="button" class="btn btn-link"><a href="./Booking.html">Book Appoitment</a></button>
+    <button type="button" class="btn btn-link"><a id="bookbtn" href="./Booking.html">Book Appoitment</a></button>
 
     <!-- <h6>Reviews</h6>
     <div>Great guy review comment</div> -->
@@ -141,6 +141,15 @@
             document.getElementById("contact").innerHTML = "Contact: " + doc.data().contact;
             })
         })// - written by nick the god
+
+
+
+
+        $("#bookbtn").click(function(event){
+          event.preventDefault();          
+          window.location.href = "./booking.html?tutor=" + tutor;
+
+        });
     </script>
 
 
