@@ -24,8 +24,8 @@
   <!------------------------------------------------------------------------------>
   <!-- Optional styles and scripts of your own                                  -->
   <!------------------------------------------------------------------------------>
-  <link rel="stylesheet" href="styles/style.css">
-  <script src="scripts/script.js"></script>
+  <!-- <link rel="stylesheet" href="styles/style.css">
+  <script src="scripts/script.js"></script> -->
 
   <script>
     // Your web app's Firebase configuration
@@ -120,6 +120,8 @@
     <h2>Appoitments</h2>
     <!-- tells user log in to see appoitmnets-->
     <!-- displays appoitmnets -->
+    <h3>LOGIN to see appoitments</h3>
+
     <div>
       <table id="appoitments" style="width:100%;">
         <thead>
@@ -187,6 +189,9 @@
           });
           i == 0;
         });
+        
+
+
 
         $("#first").click(function(event){
           event.preventDefault();
@@ -194,13 +199,12 @@
           
           window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
 
-
         });
         $("#second").click(function(event){
           event.preventDefault();
           queryString = document.getElementsByClassName("name");
           
-          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+          window.location.href = "./tutorProfile.html?tutor=" + queryString[1].innerHTML;
 
 
         });
@@ -208,7 +212,7 @@
           event.preventDefault();
           queryString = document.getElementsByClassName("name");
           
-          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+          window.location.href = "./tutorProfile.html?tutor=" + queryString[2].innerHTML;
 
 
         });
