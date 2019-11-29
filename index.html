@@ -241,6 +241,25 @@
           // An error happened.
         });
       });
+
+      // .where("student", "==", user.id)
+      firebase.auth().onAuthStateChanged(function (user) {
+        db.collection("appointments")
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              console.log(user.uid);
+              console.log(doc.data().location);
+              // console.log(user.uid);
+              // console.log(user.uid);
+              // console.log(user.uid);
+
+
+            })
+          })
+        })
+
+
     </script>
 </body>
 
