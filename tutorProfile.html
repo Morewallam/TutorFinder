@@ -95,6 +95,8 @@
     <!-- <input type="button" value="Book Appoitment" href="./Booking.html" /> -->
     <!-- <button class="nav-link" type="button" href="./Booking.html" >Book Appoitment</button> -->
     <button type="button" class="btn btn-link"><a id="bookbtn" href="./Booking.html">Book Appoitment</a></button>
+    <h3><span id="notifylogin"></span></h3>
+
 
     <!-- <h6>Reviews</h6>
     <div>Great guy review comment</div> -->
@@ -108,47 +110,56 @@
         console.log(tutor);
         document.getElementById("name").innerHTML = tutor;// show tutor name on page
 
-        
+
         db.collection("Tutors").where("name", "==", tutor)//when name = tutorname
             .get()
-            .then(function(querySnapshot) {
-                querySnapshot.forEach(function(doc ){
-                       // console.log("Current data: ", c.data());
-                document.getElementById("price").innerHTML = "Price: $" + doc.data().price + "/h";
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    // console.log("Current data: ", c.data());
+                    document.getElementById("price").innerHTML = "Price: $" + doc.data().price + "/h";
                 })
             })
         db.collection("Tutors").where("name", "==", tutor)
-        .get()
-            .then(function(querySnapshot) {
-                querySnapshot.forEach(function(doc ){
-                // console.log("Current data: ", c.data());
-                document.getElementById("subject").innerHTML = "Subject: " + doc.data().subject;
+            .get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    // console.log("Current data: ", c.data());
+                    document.getElementById("subject").innerHTML = "Subject: " + doc.data().subject;
+                })
             })
-        })
         db.collection("Tutors").where("name", "==", tutor)
-        .get()
-        .then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc){
-                // console.log("Current data: ", c.data());
-            document.getElementById("rating").innerHTML = "Rating: " + doc.data().rating;
+            .get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    // console.log("Current data: ", c.data());
+                    document.getElementById("rating").innerHTML = "Rating: " + doc.data().rating;
+                })
             })
-        })
         db.collection("Tutors").where("name", "==", tutor)
-        .get()
-        .then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc){
-                // console.log("Current data: ", c.data());
-            document.getElementById("contact").innerHTML = "Contact: " + doc.data().contact;
-            })
-        })// - written by nick the god
+            .get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    // console.log("Current data: ", c.data());
+                    document.getElementById("contact").innerHTML = "Contact: " + doc.data().contact;
+                })
+            })// - written by nick the god
+
+        $("#bookbtn").click(function (event) {
+            event.preventDefault();
+            window.location.href = "./Booking.html?tutor=" + tutor;
+
+        });
 
 
 
 
-        $("#bookbtn").click(function(event){
-          event.preventDefault();          
-          window.location.href = "./Booking.html?tutor=" + tutor;
-
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                console.log("Logged in as" + user);
+            } else {
+                console.log("not logged in");
+                document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
+            }
         });
     </script>
 

@@ -119,6 +119,8 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
+    <h3><span id="notifylogin"></span></h3>
+
   </form>
 
   <script>
@@ -138,6 +140,7 @@
           document.getElementById("priceDisplay").innerHTML = doc.data().price + "/h";
         })
       })
+    ////////////^^^^^^^^^^^DISPLAY NAME AND PRICE DEPENDEND ON URL VARIABLE NAME/^^^^^^^^^^^^^^^//////////
 
     $("#myform").submit(function (event) {
       event.preventDefault();
@@ -198,6 +201,7 @@
         console.log("Logged in as" + user);
       } else {
         console.log("not logged in");
+        document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
       }
     });
 
