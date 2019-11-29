@@ -120,6 +120,8 @@
 
     <button type="submit" class="btn btn-primary">Submit</button>
     <h3><span id="notifylogin"></span></h3>
+    <h6><span id="logout"></span></h6>
+
 
   </form>
 
@@ -200,12 +202,29 @@
       if (user) {
         console.log("Logged in as" + user);
         document.getElementById('notifylogin').innerHTML = "LOGGED IN";
+        document.getElementById('logout').innerHTML = "click to LOGOUT";
+s
+
 
       } else {
         console.log("not logged in");
         document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
+
       }
     });
+
+
+
+
+    $("#logout").click(function (event) {
+        event.preventDefault();
+        firebase.auth().signOut().then(function () {
+          console.log('logged out');
+        }).catch(function (error) {
+          console.log('error');
+          // An error happened.
+        });
+      });
 
   </script>
 </body>

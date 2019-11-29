@@ -163,6 +163,7 @@
 
     </div>
 
+    <h6><span id="logout"></span></h6>
 
 
     <div id="about-us">
@@ -214,18 +215,32 @@
         queryString = document.getElementsByClassName("name");
         window.location.href = "./tutorProfile.html?tutor=" + queryString[2].innerHTML;
       });
-//^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
+      //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
 
-firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        console.log("Logged in as" + user);
-        document.getElementById('notifylogin').innerHTML = "LOGGED IN";
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          console.log("Logged in as" + user);
+          document.getElementById('notifylogin').innerHTML = "LOGGED IN";
+          document.getElementById('logout').innerHTML = "click to LOGOUT";
 
-      } else {
-        console.log("not logged in");
-        document.getElementById('notifylogin').innerHTML = "LOGIN to see appoitments";
-      }
-    });
+
+        } else {
+          console.log("not logged in");
+          document.getElementById('notifylogin').innerHTML = "LOGIN to see appoitments";
+
+        }
+      });
+
+
+      $("#logout").click(function (event) {
+        event.preventDefault();
+        firebase.auth().signOut().then(function () {
+          console.log('logged out');
+        }).catch(function (error) {
+          console.log('error');
+          // An error happened.
+        });
+      });
     </script>
 </body>
 

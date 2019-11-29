@@ -19,15 +19,15 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
-   
-    <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
-  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
-   
-   <script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+
+    <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyDwW0SxAa7rQNtirqtI7U1UQkOAudflZWQ",
@@ -69,13 +69,17 @@
             </ul>
         </div>
     </nav>
-   
-<br>
-<br>
-<br>
+
+    <br>
+    <br>
+    <br>
 
     <div id="firebaseui-auth-container"></div>
     <div id="loader">Loading...</div>
+    <h3><span id="notifylogin"></span></h3>
+    <h6><span id="logout"></span></h6>
+
+
 
     <script>
         // Initialize the FirebaseUI Widget using Firebase.
@@ -116,6 +120,47 @@
         // The start method will wait until the DOM is loaded.
         ui.start('#firebaseui-auth-container', uiConfig);
 
+
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                console.log("Logged in as" + user);
+                document.getElementById('notifylogin').innerHTML = "LOGGED IN";
+                document.getElementById('logout').innerHTML = "click to LOGOUT";
+
+
+                // $("#logout").click(function (event) {
+                //     event.preventDefault();
+                //     firebase.auth().signOut().then(function () {
+                //         // Sign-out successful.
+                //         console.log("Sign-out successful");
+
+                //     }).catch(function (error) {
+                //         // An error happened.
+                //         console.log("error");
+
+                //     });
+                // });
+
+            } else {
+                console.log("not logged in");
+                document.getElementById('notifylogin').innerHTML = "NOT LOGGED IN";
+
+            }
+        });
+
+
+
+
+        $("#logout").click(function (event) {
+        event.preventDefault();
+        firebase.auth().signOut().then(function () {
+          console.log('logged out');
+        }).catch(function (error) {
+          console.log('error');
+          // An error happened.
+        });
+      });
     </script>
 </body>
 
