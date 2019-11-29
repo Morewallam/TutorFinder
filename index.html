@@ -24,8 +24,8 @@
   <!------------------------------------------------------------------------------>
   <!-- Optional styles and scripts of your own                                  -->
   <!------------------------------------------------------------------------------>
-  <link rel="stylesheet" href="styles/style.css">
-  <script src="scripts/script.js"></script>
+  <!-- <link rel="stylesheet" href="styles/style.css">
+  <script src="scripts/script.js"></script> -->
 
   <script>
     // Your web app's Firebase configuration
@@ -93,7 +93,8 @@
     <div class="row">
       <div class="col-lg-4 first">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a id="first" href="./tutorProfile.html"><span class="name"></span></a></button>
+        <button type="button" class="btn btn-link"><a id="first" href="./tutorProfile.html"><span
+              class="name"></span></a></button>
         <div class="bio">
           <div><span class="price"></span></div>
           <div><span class="subject"></span></div>
@@ -101,7 +102,8 @@
       </div>
       <div class="col-lg-4 second">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a id="second"href="./tutorProfile.html"><span class="name"></span></a></button>
+        <button type="button" class="btn btn-link"><a id="second" href="./tutorProfile.html"><span
+              class="name"></span></a></button>
         <div class="bio">
           <div><span class="price"></span></div>
           <div><span class="subject"></span></div>
@@ -109,7 +111,8 @@
       </div>
       <div class="col-lg-4 third">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a id="third" href="./tutorProfile.html"><span class="name"></span></a></button>
+        <button type="button" class="btn btn-link"><a id="third" href="./tutorProfile.html"><span
+              class="name"></span></a></button>
         <div class="bio">
           <div><span class="price"></span></div>
           <div><span class="subject"></span></div>
@@ -120,6 +123,8 @@
     <h2>Appoitments</h2>
     <!-- tells user log in to see appoitmnets-->
     <!-- displays appoitmnets -->
+    <h3><span id="notifylogin"></span></h3>
+
     <div>
       <table id="appoitments" style="width:100%;">
         <thead>
@@ -128,6 +133,7 @@
             <th>Time</th>
             <th>Location</th>
             <th>Tutor</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody>
@@ -136,24 +142,30 @@
             <td class="time">a2</td>
             <td class='location'>a3</td>
             <td class="tutor">a4</td>
+            <td class="price">a5</td>
           </tr>
           <tr id="appoint2">
             <td class="date">a1</td>
             <td class="time">a2</td>
             <td class='location'>a3</td>
             <td class="tutor">a4</td>
+            <td class="price">a5</td>
+
           </tr>
           <tr id="appoint3">
             <td class="date">a1</td>
             <td class="time">a2</td>
             <td class='location'>a3</td>
             <td class="tutor">a4</td>
+            <td class="price">a5</td>
+
           </tr>
         </tbody>
       </table>
 
     </div>
 
+    <h6><span id="logout"></span></h6>
 
 
     <div id="about-us">
@@ -189,6 +201,7 @@
             i == 0;
           });
 
+
           $("#first").click(function(event){
             event.preventDefault();
             queryString = document.getElementsByClassName("name");
@@ -213,6 +226,7 @@
 
 
           });
+          //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
           firebase.auth().onAuthStateChanged(function(user) {
             var appointName = document.getElementsByClassName("tutor");
             var appointDate = document.getElementsByClassName("date");
@@ -243,7 +257,32 @@
           });
         });
 
-     </script>
+
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          console.log("Logged in as" + user);
+          document.getElementById('notifylogin').innerHTML = "LOGGED IN";
+          document.getElementById('logout').innerHTML = "click to LOGOUT";
+
+
+        } else {
+          console.log("not logged in");
+          document.getElementById('notifylogin').innerHTML = "LOGIN to see appoitments";
+
+        }
+      });
+
+
+      $("#logout").click(function (event) {
+        event.preventDefault();
+        firebase.auth().signOut().then(function () {
+          console.log('logged out');
+        }).catch(function (error) {
+          console.log('error');
+          // An error happened.
+        });
+      });
+    </script>
 </body>
 
 </html>

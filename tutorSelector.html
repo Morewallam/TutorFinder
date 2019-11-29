@@ -23,8 +23,8 @@
   <!------------------------------------------------------------------------------>
   <!-- Optional styles and scripts of your own                                  -->
   <!------------------------------------------------------------------------------>
-  <link rel="stylesheet" href="styles/style.css">
-  <script src="scripts/script.js"></script>
+  <!-- <link rel="stylesheet" href="styles/style.css">
+  <script src="scripts/script.js"></script> -->
 
   <script>
     // Your web app's Firebase configuration
@@ -116,6 +116,8 @@
       </div>
     </div>
   </div>
+  <h3><span id="notifylogin"></span></h3>
+  <h6><span id="logout"></span></h6>
 
   <script>
 
@@ -133,13 +135,58 @@
           tutorsName[i].innerHTML = doc.data().name;
           tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
           tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
-
-
           i++;
         });
         i == 0;
       });
 
+    $("#first").click(function (event) {
+      event.preventDefault();
+      queryString = document.getElementsByClassName("name");
+      window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+    });
+
+    $("#second").click(function (event) {
+      event.preventDefault();
+      queryString = document.getElementsByClassName("name");
+      window.location.href = "./tutorProfile.html?tutor=" + queryString[1].innerHTML;
+    });
+
+    $("#third").click(function (event) {
+      event.preventDefault();
+      queryString = document.getElementsByClassName("name");
+      window.location.href = "./tutorProfile.html?tutor=" + queryString[2].innerHTML;
+    });
+//^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
+
+
+
+firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        console.log("Logged in as" + user);
+        document.getElementById('notifylogin').innerHTML = "LOGGED IN"; 
+        document.getElementById('logout').innerHTML = "click to LOGOUT";
+ 
+ 
+      } else {
+        console.log("not logged in");
+        document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
+
+      }
+    });
+
+
+
+
+    $("#logout").click(function (event) {
+        event.preventDefault();
+        firebase.auth().signOut().then(function () {
+          console.log('logged out');
+        }).catch(function (error) {
+          console.log('error');
+          // An error happened.
+        });
+      });
   </script>
 
 </body>
