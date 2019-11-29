@@ -100,26 +100,16 @@
     <div>Great guy review comment</div> -->
 
     <script>
-        var name = window.location.href
-        var url = new URL(name);
-        var query_string = url.search;
-
-        var search_params = new URLSearchParams(query_string);
-
-        var tutor = search_params.get('tutor');
-
-        // output : jim
+        var name = window.location.href//name = url 
+        var url = new URL(name); //pass url through URL obj
+        var query_string = url.search; //parse???
+        var search_params = new URLSearchParams(query_string);//pass thorugh URLsearchparams obj
+        var tutor = search_params.get('tutor');// get the tutor name
         console.log(tutor);
-        document.getElementById("name").innerHTML = tutor;
+        document.getElementById("name").innerHTML = tutor;// show tutor name on page
 
         
-        // var name = window.location.href
-        // db.collection("Tutors").where("name", "==", tutor).limit(1)
-        //     .onSnapshot(function (c) {
-        //         // console.log("Current data: ", c.data());
-        //         document.getElementById("name").innerHTML = c.data().name;
-        //     })
-        db.collection("Tutors").where("name", "==", tutor)
+        db.collection("Tutors").where("name", "==", tutor)//when name = tutorname
             .get()
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc ){
@@ -150,7 +140,7 @@
                 // console.log("Current data: ", c.data());
             document.getElementById("contact").innerHTML = "Contact: " + doc.data().contact;
             })
-        })
+        })// - written by nick the god
     </script>
 
 
