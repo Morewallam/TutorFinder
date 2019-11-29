@@ -131,23 +131,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>a1</td>
-            <td>a2</td>
-            <td>a3</td>
-            <td>a4</td>
+          <tr id="appoint1">
+            <td class="date">a1</td>
+            <td class="time">a2</td>
+            <td class='location'>a3</td>
+            <td class="tutor">a4</td>
           </tr>
-          <tr>
-            <td>b1</td>
-            <td>b2</td>
-            <td>b3</td>
-            <td>b4</td>
+          <tr id="appoint2">
+            <td class="date">a1</td>
+            <td class="time">a2</td>
+            <td class='location'>a3</td>
+            <td class="tutor">a4</td>
           </tr>
-          <tr>
-            <td>c1</td>
-            <td>c2</td>
-            <td>c3</td>
-            <td>c4</td>
+          <tr id="appoint3">
+            <td class="date">a1</td>
+            <td class="time">a2</td>
+            <td class='location'>a3</td>
+            <td class="tutor">a4</td>
           </tr>
         </tbody>
       </table>
@@ -169,48 +169,78 @@
 
 
     <script>
-      var tutorsName = document.getElementsByClassName("name");
-      var tutorsPrice = document.getElementsByClassName("price");
-      var tutorsSubject = document.getElementsByClassName("subject");
-      i = 0;
-      //first tutor 
-      db.collection("Tutors")
-        .orderBy("rating")
-        .limit(3)
-        .get()
-        .then(function (querySnapshot) {
-          querySnapshot.forEach(function (doc) {
-            tutorsName[i].innerHTML = doc.data().name;
-            tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
-            tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
-              i++;
+      $(document).ready(function() {
+        var tutorsName = document.getElementsByClassName("name");
+        var tutorsPrice = document.getElementsByClassName("price");
+        var tutorsSubject = document.getElementsByClassName("subject");
+        i = 0;
+        //first tutor 
+        db.collection("Tutors")
+          .orderBy("rating")
+          .limit(3)
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              tutorsName[i].innerHTML = doc.data().name;
+              tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
+              tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
+                i++;
+            });
+            i == 0;
           });
-          i == 0;
-        });
 
-        $("#first").click(function(event){
-          event.preventDefault();
-          queryString = document.getElementsByClassName("name");
-          
-          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+          $("#first").click(function(event){
+            event.preventDefault();
+            queryString = document.getElementsByClassName("name");
+            
+            window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
 
 
-        });
-        $("#second").click(function(event){
-          event.preventDefault();
-          queryString = document.getElementsByClassName("name");
-          
-          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+          });
+          $("#second").click(function(event){
+            event.preventDefault();
+            queryString = document.getElementsByClassName("name");
+            
+            window.location.href = "./tutorProfile.html?tutor=" + queryString[1].innerHTML;
 
 
-        });
-        $("#third").click(function(event){
-          event.preventDefault();
-          queryString = document.getElementsByClassName("name");
-          
-          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+          });
+          $("#third").click(function(event){
+            event.preventDefault();
+            queryString = document.getElementsByClassName("name");
+            
+            window.location.href = "./tutorProfile.html?tutor=" + queryString[2].innerHTML;
 
 
+          });
+          firebase.auth().onAuthStateChanged(function(user) {
+            var appointName = document.getElementsByClassName("tutor");
+            var appointDate = document.getElementsByClassName("date");
+            var appointLoc = document.getElementsByClassName("location");
+            var appointTime = document.getElementsByClassName("time");
+
+            
+
+
+            db.collection("appointments").where("student","==", user.uid)
+            .limit(3)
+            .get()
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                appointName[i].innerHTML = doc.data().tutor;
+                appointDate[i].innerHTML = doc.data().date;
+                appointLoc[i].innerHTML = doc.data().location;
+                appointTime[i].innerHTML =doc.data().time;
+                  i++;
+                  console.log(doc.data().tutor, doc.data().date,doc.data().location,doc.data().time )
+
+              });
+
+            })
+            .catch(function(error){
+              console.log("Error getting documents: ", error);
+            });
+          });
         });
 
      </script>
