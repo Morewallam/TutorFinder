@@ -97,10 +97,13 @@
 
     <label for="formGroupExampleInput">Location</label>
     <select class="form-control" id="locationInput">
-      <option>Math </option><!-- Put in the subjects from the tutors profile-->
+      <option>Library </option>
+      <option>School </option>
+      <option>Community Center </option>
+      <option>Home </option><!-- Put in the subjects from the tutors profile-->
     </select>
 
-    <div class="form-row">
+    <!-- <div class="form-row">
       <div class="form-group col-md-3">
         <label for="inputCity">City</label>
         <input type="text" class="form-control" id="inputCity" />
@@ -116,7 +119,7 @@
         <label for="inputZip">Zip</label>
         <input type="text" class="form-control" id="inputZip" />
       </div>
-    </div>
+    </div> -->
 
     <button type="submit" class="btn btn-primary">Submit</button>
     <h3><span id="notifylogin"></span></h3>
@@ -153,9 +156,9 @@
       let date = $("#datePicker").val();
       let time = $("#TimePicker").val();
       let location = $("#locationInput").val();
-      let city = $("#inputCity").val();
-      let state = $("#inputState").val();
-      let zip = $("#inputZip").val();
+      // let city = $("#inputCity").val();
+      // let state = $("#inputState").val();
+      // let zip = $("#inputZip").val();
 
       function setDatabase(_callback) {
         firebase.auth().onAuthStateChanged(function (user) {
