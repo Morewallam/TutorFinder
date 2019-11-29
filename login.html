@@ -63,8 +63,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./tutorSelector.html">Find a Tutor</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="./login.html">Login</a>
+                <li class="nav-item" id="login" >
+                      <a class="nav-link" href="./login.html" >Login</a>
+                </li>
+                <li class="nav-item logout" id="logOut" >
+                   <a class='nav-link logout' href='javascript:void(0)'>Logout</a>
                 </li>
             </ul>
         </div>
@@ -77,7 +80,7 @@
     <div id="firebaseui-auth-container"></div>
     <div id="loader">Loading...</div>
     <h3><span id="notifylogin"></span></h3>
-    <h6><span id="logout"></span></h6>
+    <h6><span class="logout"></span></h6>
 
 
 
@@ -124,27 +127,21 @@
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-                console.log("Logged in as" + user);
-                document.getElementById('notifylogin').innerHTML = "LOGGED IN";
-                document.getElementById('logout').innerHTML = "click to LOGOUT";
-
-
-                // $("#logout").click(function (event) {
-                //     event.preventDefault();
-                //     firebase.auth().signOut().then(function () {
-                //         // Sign-out successful.
-                //         console.log("Sign-out successful");
-
-                //     }).catch(function (error) {
-                //         // An error happened.
-                //         console.log("error");
-
-                //     });
-                // });
-
+          console.log("Logged in as" + user);
+          document.getElementById('notifylogin').innerHTML = "LOGGED IN"; 
+          document.getElementById('login').innerHTML =" <a class='nav-link' href='./login.html' ></a>";
+          document.getElementById('logOut') = "<a class='nav-link logout' href='javascript:void(0)'>Logout</a>"
+        
+          
+          //document.getElementById('logout').innerHTML = "click to LOGOUT";
+  
+  
             } else {
-                console.log("not logged in");
-                document.getElementById('notifylogin').innerHTML = "NOT LOGGED IN";
+            console.log("not logged in");
+            document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
+            document.getElementById('login').innerHTML="<a class='nav-link' href='./login.html' >Login</a>";
+            document.getElementById('logOut').innerHTML = "<a class='nav-link logout' href='javascript:void(0)'></a>"
+            
 
             }
         });
@@ -152,7 +149,7 @@
 
 
 
-        $("#logout").click(function (event) {
+        $(".logout").click(function (event) {
         event.preventDefault();
         firebase.auth().signOut().then(function () {
           console.log('logged out');
