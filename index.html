@@ -133,31 +133,31 @@
             <th>Time</th>
             <th>Location</th>
             <th>Tutor</th>
-            <th>Price</th>
+            <!-- <th>Price</th> -->
           </tr>
         </thead>
         <tbody>
           <tr id="appoint1">
-            <td class="date">a1</td>
-            <td class="time">a2</td>
-            <td class='location'>a3</td>
-            <td class="tutor">a4</td>
-            <td class="price">a5</td>
+            <td class="date"></td>
+            <td class="time"></td>
+            <td class='location'></td>
+            <td class="tutor"></td>
+            <!-- <td class="price">a5</td> -->
           </tr>
           <tr id="appoint2">
-            <td class="date">a1</td>
-            <td class="time">a2</td>
-            <td class='location'>a3</td>
-            <td class="tutor">a4</td>
-            <td class="price">a5</td>
+            <td class="date"></td>
+            <td class="time"></td>
+            <td class='location'></td>
+            <td class="tutor"></td>
+            <!-- <td class="price">a5</td> -->
 
           </tr>
           <tr id="appoint3">
-            <td class="date">a1</td>
-            <td class="time">a2</td>
-            <td class='location'>a3</td>
-            <td class="tutor">a4</td>
-            <td class="price">a5</td>
+            <td class="date"></td>
+            <td class="time"></td>
+            <td class='location'></td>
+            <td class="tutor"></td>
+            <!-- <td class="price">a5</td> -->
 
           </tr>
         </tbody>
@@ -204,58 +204,54 @@
 
           $("#first").click(function(event){
             event.preventDefault();
-            queryString = document.getElementsByClassName("name");
-            
+            queryString = document.getElementsByClassName("name");     
             window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
-
-
           });
           $("#second").click(function(event){
             event.preventDefault();
             queryString = document.getElementsByClassName("name");
-            
             window.location.href = "./tutorProfile.html?tutor=" + queryString[1].innerHTML;
-
-
           });
           $("#third").click(function(event){
             event.preventDefault();
             queryString = document.getElementsByClassName("name");
-            
             window.location.href = "./tutorProfile.html?tutor=" + queryString[2].innerHTML;
-
-
           });
+        });
+
           //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
           firebase.auth().onAuthStateChanged(function(user) {
             var appointName = document.getElementsByClassName("tutor");
             var appointDate = document.getElementsByClassName("date");
             var appointLoc = document.getElementsByClassName("location");
             var appointTime = document.getElementsByClassName("time");
-
-            
-
-
+            let i = 0;
             db.collection("appointments").where("student","==", user.uid)
             .limit(3)
             .get()
             .then(function (querySnapshot) {
               querySnapshot.forEach(function (doc) {
+                console.log(user.uid);
+
+                console.log(appointName);
+                console.log(appointDate);
+                console.log(appointLoc);
+                console.log(appointTime);
+                console.log(doc.data().tutor, doc.data().date,doc.data().location,doc.data().time )
+
                 appointName[i].innerHTML = doc.data().tutor;
                 appointDate[i].innerHTML = doc.data().date;
                 appointLoc[i].innerHTML = doc.data().location;
-                appointTime[i].innerHTML =doc.data().time;
-                  i++;
-                  console.log(doc.data().tutor, doc.data().date,doc.data().location,doc.data().time )
-
+                appointTime[i].innerHTML = doc.data().time;
+                i++;
+                // console.log(doc.data().tutor, doc.data().date,doc.data().location,doc.data().time )
               });
-
+              i == 0;
             })
             .catch(function(error){
               console.log("Error getting documents: ", error);
             });
           });
-        });
 
 
       firebase.auth().onAuthStateChanged(function (user) {
@@ -284,21 +280,19 @@
       });
 
       // .where("student", "==", user.id)
-      firebase.auth().onAuthStateChanged(function (user) {
-        db.collection("appointments")
-          .get()
-          .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-              console.log(user.uid);
-              console.log(doc.data().location);
-              // console.log(user.uid);
-              // console.log(user.uid);
-              // console.log(user.uid);
-
-
-            })
-          })
-        })
+      // firebase.auth().onAuthStateChanged(function (user) {
+      //   db.collection("appointments")
+      //     .get()
+      //     .then(function (querySnapshot) {
+      //       querySnapshot.forEach(function (doc) {
+      //         console.log(user.uid);
+      //         console.log(doc.data().location);
+      //         // console.log(user.uid);
+      //         // console.log(user.uid);
+      //         // console.log(user.uid);
+      //       })
+      //     })
+      //   })
 
 
     </script>
