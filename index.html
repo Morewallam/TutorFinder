@@ -219,6 +219,8 @@
 firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         console.log("Logged in as" + user);
+        document.getElementById('notifylogin').innerHTML = "LOGGED IN";
+
       } else {
         console.log("not logged in");
         document.getElementById('notifylogin').innerHTML = "LOGIN to see appoitments";
