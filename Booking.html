@@ -79,7 +79,7 @@
       <div class="form-group col-md-4">
         <label for="formGroupExampleInput">Subject</label>
         <select class="form-control" id="formGroupExampleInput">
-          <option>Math </option><!-- Put in the subjects from the tutors profile-->
+          <option>Math</option><!-- Put in the subjects from the tutors profile-->
         </select>
       </div>
       <div class="form-group col-md-4">
@@ -89,16 +89,16 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-2">
-        <label for="datePicker">Date</label>
+        <label for="datePicker">Date*</label>
         <input type="date" id="datePicker" />
       </div>
       <div class="form-group col-md-4">
-        <label for="TimePicker">Time</label>
+        <label for="TimePicker">Time*</label>
         <input type="time" id="TimePicker" />
       </div>
     </div>
 
-    <label for="formGroupExampleInput">Location</label>
+    <label for="formGroupExampleInput">Location*</label>
     <select class="form-control" id="locationInput">
       <option>Library </option>
       <option>School </option>
@@ -136,11 +136,11 @@
     var url = new URL(name); //pass url through URL obj
     var query_string = url.search; //parse???
     var search_params = new URLSearchParams(query_string);//pass thorugh URLsearchparams obj
-    var tutor = search_params.get('tutor');// get the tutor name
-    console.log(tutor);
-    document.getElementById("nameDisplay").innerHTML = tutor;// show tutor name on page
+    var tutorName = search_params.get('tutor');// get the tutor name
+    console.log(tutorName);
+    document.getElementById("nameDisplay").innerHTML = tutorName;// show tutor name on page
 
-    db.collection("Tutors").where("name", "==", tutor)//when name = tutorname
+    db.collection("Tutors").where("name", "==", tutorName)//when name = tutorname
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
@@ -152,7 +152,7 @@
 
     $("#myform").submit(function (event) {
       event.preventDefault();
-      let tutor = $("#nameDisplay").val();
+      let tutor = tutorName;
       let price = $("#priceDisplay").val();
       let subject = $("#formGroupExampleInput").val();
       let course = $("#formGroupExampleInput2").val();
@@ -226,9 +226,7 @@
     });
 
 
-
-
-    $(".logout").click(function (event) {
+    $("#logout").click(function (event) {
         event.preventDefault();
         firebase.auth().signOut().then(function () {
           console.log('logged out');
