@@ -119,26 +119,38 @@
         //         // console.log("Current data: ", c.data());
         //         document.getElementById("name").innerHTML = c.data().name;
         //     })
-        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-            .onSnapshot(function (c) {
-                // console.log("Current data: ", c.data());
-                document.getElementById("price").innerHTML = "Price: $" + c.data().price + "/h";
+        db.collection("Tutors").where("name", "==", tutor)
+            .get()
+            .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc ){
+                       // console.log("Current data: ", c.data());
+                document.getElementById("price").innerHTML = "Price: $" + doc.data().price + "/h";
+                })
             })
-        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-            .onSnapshot(function (c) {
+        db.collection("Tutors").where("name", "==", tutor)
+        .get()
+            .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc ){
                 // console.log("Current data: ", c.data());
-                document.getElementById("subject").innerHTML = "Subject: " + c.data().subject;
+                document.getElementById("subject").innerHTML = "Subject: " + doc.data().subject;
             })
-        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-            .onSnapshot(function (c) {
+        })
+        db.collection("Tutors").where("name", "==", tutor)
+        .get()
+        .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc){
                 // console.log("Current data: ", c.data());
-                document.getElementById("rating").innerHTML = "Rating: " + c.data().rating;
+            document.getElementById("rating").innerHTML = "Rating: " + doc.data().rating;
             })
-        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-            .onSnapshot(function (c) {
+        })
+        db.collection("Tutors").where("name", "==", tutor)
+        .get()
+        .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc){
                 // console.log("Current data: ", c.data());
-                document.getElementById("rating").innerHTML = "Contact: " + c.data().contact;
+            document.getElementById("contact").innerHTML = "Contact: " + doc.data().contact;
             })
+        })
     </script>
 
 
