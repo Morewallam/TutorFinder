@@ -108,32 +108,11 @@
                 querySnapshot.forEach(function (doc) {
                     // console.log("Current data: ", c.data());
                     document.getElementById("price").innerHTML = "Price: $" + doc.data().price + "/h";
-                })
-            })
-        db.collection("Tutors").where("name", "==", tutor)
-            .get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    // console.log("Current data: ", c.data());
                     document.getElementById("subject").innerHTML = "Subject: " + doc.data().subject;
-                })
-            })
-        db.collection("Tutors").where("name", "==", tutor)
-            .get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    // console.log("Current data: ", c.data());
                     document.getElementById("rating").innerHTML = "Rating: " + doc.data().rating;
-                })
-            })
-        db.collection("Tutors").where("name", "==", tutor)
-            .get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    // console.log("Current data: ", c.data());
                     document.getElementById("contact").innerHTML = "Contact: " + doc.data().contact;
                 })
-            })// - written by nick the god
+            })
 
         $("#bookbtn").click(function (event) {
             event.preventDefault();
