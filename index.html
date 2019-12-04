@@ -24,8 +24,8 @@
   <!------------------------------------------------------------------------------>
   <!-- Optional styles and scripts of your own                                  -->
   <!------------------------------------------------------------------------------>
-  <link rel="stylesheet" href="styles/style.css">
-  <script src="scripts/script.js"></script>
+  <!-- <link rel="stylesheet" href="styles/style.css">
+  <script src="scripts/script.js"></script> -->
 
   <script>
     // Your web app's Firebase configuration
@@ -65,8 +65,11 @@
         <li class="nav-item">
           <a class="nav-link" href="./tutorSelector.html">Find a Tutor</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./login.html">Login</a>
+        <li class="nav-item" id="login" >
+            <a class="nav-link" href="./login.html" >Login</a>
+        </li>
+        <li class="nav-item logout" id="logOut" >
+           <a class='nav-link logout' href='javascript:void(0)'>Logout</a>
         </li>
       </ul>
     </div>
@@ -93,7 +96,8 @@
     <div class="row">
       <div class="col-lg-4 first">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a id="first" href="./tutorProfile.html"><span class="name"></span></a></button>
+        <button type="button" class="btn btn-link"><a id="first" href="./tutorProfile.html"><span
+              class="name"></span></a></button>
         <div class="bio">
           <div><span class="price"></span></div>
           <div><span class="subject"></span></div>
@@ -101,7 +105,8 @@
       </div>
       <div class="col-lg-4 second">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a id="second"href="./tutorProfile.html"><span class="name"></span></a></button>
+        <button type="button" class="btn btn-link"><a id="second" href="./tutorProfile.html"><span
+              class="name"></span></a></button>
         <div class="bio">
           <div><span class="price"></span></div>
           <div><span class="subject"></span></div>
@@ -109,7 +114,8 @@
       </div>
       <div class="col-lg-4 third">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a id="third" href="./tutorProfile.html"><span class="name"></span></a></button>
+        <button type="button" class="btn btn-link"><a id="third" href="./tutorProfile.html"><span
+              class="name"></span></a></button>
         <div class="bio">
           <div><span class="price"></span></div>
           <div><span class="subject"></span></div>
@@ -120,6 +126,8 @@
     <h2>Appoitments</h2>
     <!-- tells user log in to see appoitmnets-->
     <!-- displays appoitmnets -->
+    <h3><span id="notifylogin"></span></h3>
+
     <div>
       <table id="appoitments" style="width:100%;">
         <thead>
@@ -128,32 +136,39 @@
             <th>Time</th>
             <th>Location</th>
             <th>Tutor</th>
+            <!-- <th>Price</th> -->
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>a1</td>
-            <td>a2</td>
-            <td>a3</td>
-            <td>a4</td>
+          <tr id="appoint1">
+            <td class="date"></td>
+            <td class="time"></td>
+            <td class='location'></td>
+            <td class="tutor"></td>
+            <!-- <td class="price">a5</td> -->
           </tr>
-          <tr>
-            <td>b1</td>
-            <td>b2</td>
-            <td>b3</td>
-            <td>b4</td>
+          <tr id="appoint2">
+            <td class="date"></td>
+            <td class="time"></td>
+            <td class='location'></td>
+            <td class="tutor"></td>
+            <!-- <td class="price">a5</td> -->
+
           </tr>
-          <tr>
-            <td>c1</td>
-            <td>c2</td>
-            <td>c3</td>
-            <td>c4</td>
+          <tr id="appoint3">
+            <td class="date"></td>
+            <td class="time"></td>
+            <td class='location'></td>
+            <td class="tutor"></td>
+            <!-- <td class="price">a5</td> -->
+
           </tr>
         </tbody>
       </table>
 
     </div>
 
+    <h6><span id="logout"></span></h6>
 
 
     <div id="about-us">
@@ -169,51 +184,128 @@
 
 
     <script>
-      var tutorsName = document.getElementsByClassName("name");
-      var tutorsPrice = document.getElementsByClassName("price");
-      var tutorsSubject = document.getElementsByClassName("subject");
-      i = 0;
-      //first tutor 
-      db.collection("Tutors")
-        .orderBy("rating")
-        .limit(3)
-        .get()
-        .then(function (querySnapshot) {
-          querySnapshot.forEach(function (doc) {
-            tutorsName[i].innerHTML = doc.data().name;
-            tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
-            tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
-              i++;
+      $(document).ready(function() {
+        var tutorsName = document.getElementsByClassName("name");
+        var tutorsPrice = document.getElementsByClassName("price");
+        var tutorsSubject = document.getElementsByClassName("subject");
+        i = 0;
+        //first tutor 
+        db.collection("Tutors")
+          .orderBy("rating")
+          .limit(3)
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              tutorsName[i].innerHTML = doc.data().name;
+              tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
+              tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
+                i++;
+            });
+            i == 0;
           });
-          i == 0;
+
+
+          $("#first").click(function(event){
+            event.preventDefault();
+            queryString = document.getElementsByClassName("name");     
+            window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+          });
+          $("#second").click(function(event){
+            event.preventDefault();
+            queryString = document.getElementsByClassName("name");
+            window.location.href = "./tutorProfile.html?tutor=" + queryString[1].innerHTML;
+          });
+          $("#third").click(function(event){
+            event.preventDefault();
+            queryString = document.getElementsByClassName("name");
+            window.location.href = "./tutorProfile.html?tutor=" + queryString[2].innerHTML;
+          });
         });
 
-        $("#first").click(function(event){
-          event.preventDefault();
-          queryString = document.getElementsByClassName("name");
+          //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
+          firebase.auth().onAuthStateChanged(function(user) {
+            var appointName = document.getElementsByClassName("tutor");
+            var appointDate = document.getElementsByClassName("date");
+            var appointLoc = document.getElementsByClassName("location");
+            var appointTime = document.getElementsByClassName("time");
+            let i = 0;
+            db.collection("appointments").where("student","==", user.uid)
+            .limit(3)
+            .get()
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                console.log(user.uid);
+
+                console.log(appointName);
+                console.log(appointDate);
+                console.log(appointLoc);
+                console.log(appointTime);
+                console.log(doc.data().tutor, doc.data().date,doc.data().location,doc.data().time )
+
+                appointName[i].innerHTML = doc.data().tutor;
+                appointDate[i].innerHTML = doc.data().date;
+                appointLoc[i].innerHTML = doc.data().location;
+                appointTime[i].innerHTML = doc.data().time;
+                i++;
+                // console.log(doc.data().tutor, doc.data().date,doc.data().location,doc.data().time )
+              });
+              i == 0;
+            })
+            .catch(function(error){
+              console.log("Error getting documents: ", error);
+            });
+          });
+
+
+      firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+          console.log("Logged in as" + user);
+          document.getElementById('notifylogin').innerHTML = "LOGGED IN"; 
+          document.getElementById('login').innerHTML =" <a class='nav-link' href='./login.html' ></a>";
+          document.getElementById('logOut') = "<a class='nav-link logout' href='javascript:void(0)'>Logout</a>"
+        
           
-          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
-
-
-        });
-        $("#second").click(function(event){
-          event.preventDefault();
-          queryString = document.getElementsByClassName("name");
+          //document.getElementById('logout').innerHTML = "click to LOGOUT";
+  
+  
+        } else {
+          console.log("not logged in");
+          document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
+          document.getElementById('login').innerHTML="<a class='nav-link' href='./login.html' >Login</a>";
+          document.getElementById('logOut').innerHTML = "<a class='nav-link logout' href='javascript:void(0)'></a>"
           
-          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+
+        }
+      });
 
 
+      $(".logout").click(function (event) {
+        event.preventDefault();
+        firebase.auth().signOut().then(function () {
+          console.log('logged out');
+        }).catch(function (error) {
+          console.log('error');
+          // An error happened.
         });
-        $("#third").click(function(event){
-          event.preventDefault();
-          queryString = document.getElementsByClassName("name");
-          
-          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+      });
+
+      // .where("student", "==", user.id)
+      // firebase.auth().onAuthStateChanged(function (user) {
+      //   db.collection("appointments")
+      //     .get()
+      //     .then(function (querySnapshot) {
+      //       querySnapshot.forEach(function (doc) {
+      //         console.log(user.uid);
+      //         console.log(doc.data().location);
+      //         // console.log(user.uid);
+      //         // console.log(user.uid);
+      //         // console.log(user.uid);
+      //       })
+      //     })
+      //   })
 
 
-        });
-
-     </script>
+    </script>
 </body>
 
 </html>

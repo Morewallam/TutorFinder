@@ -23,8 +23,8 @@
   <!------------------------------------------------------------------------------>
   <!-- Optional styles and scripts of your own                                  -->
   <!------------------------------------------------------------------------------>
-  <link rel="stylesheet" href="styles/style.css">
-  <script src="scripts/script.js"></script>
+  <!-- <link rel="stylesheet" href="styles/style.css">
+  <script src="scripts/script.js"></script> -->
 
   <script>
     // Your web app's Firebase configuration
@@ -64,8 +64,11 @@
         <li class="nav-item active">
           <a class="nav-link" href="./tutorSelector.html">Find a Tutor<span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./login.html">Login</a>
+        <li class="nav-item" id="login" >
+          <a class="nav-link" href="./login.html" >Login</a>
+        </li>
+        <li class="nav-item logout" id="logOut" >
+            <a class='nav-link logout' href='javascript:void(0)'>Logout</a>
         </li>
       </ul>
     </div>
@@ -86,60 +89,95 @@
   </div>
   <h2 class="small-title">Tutors</h2>
   <div class="container">
-    <div class="row">
-      <div class="col-lg-4 first">
-        <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a id="first" href="./tutorProfile.html"><span
-              class="name"></span></a></button>
-        <div class="bio">
-          <div><span class="price"></span></div>
-          <div><span class="subject"></span></div>
-        </div>
-      </div>
-      <div class="col-lg-4 second">
-        <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a id="second" href="./tutorProfile.html"><span
-              class="name"></span></a></button>
-        <div class="bio">
-          <div><span class="price"></span></div>
-          <div><span class="subject"></span></div>
-        </div>
-      </div>
-      <div class="col-lg-4 third">
-        <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="btn btn-link"><a id="third" href="./tutorProfile.html"><span
-              class="name"></span></a></button>
-        <div class="bio">
-          <div><span class="price"></span></div>
-          <div><span class="subject"></span></div>
-        </div>
-      </div>
-    </div>
   </div>
+  <h3><span id="notifylogin"></span></h3>
+  <h6><span class="logout"></span></h6>
 
   <script>
-
-    var tutorsName = document.getElementsByClassName("name");
-    var tutorsPrice = document.getElementsByClassName("price");
-    var tutorsSubject = document.getElementsByClassName("subject");
-    i = 0;
-    //first tutor 
-    db.collection("Tutors")
+    $(document).ready(function(){db.collection("Tutors")
       .orderBy("rating")
-      .limit(3)
       .get()
       .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          tutorsName[i].innerHTML = doc.data().name;
-          tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
-          tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
+        //querySnapshot.forEach(function (doc) {
 
+          var tutorList = "";
+          console.log(querySnapshot.docs);
+          for(let i = 1; i <= querySnapshot.size; i++){
+            if(i%3 == 1){
+              tutorList += "<div class='row'>";
+            }
+              tutorList +=  "<div class='col-lg-4'>";
+              tutorList += "<img src='Images/blank_pp.png' class='pp'>"
+              tutorList +=  "<button type='button' class='btn btn-link'><a id='"+i+"' href='./tutorProfile.html'><span class='name'></span></a></button>";
+              tutorList += "<div class='bio'>";
+              tutorList += "<div><span id='price"+i+"'></span></div>";
+              tutorList += "<div><span id='subject"+i+"'></span></div>";
+              tutorList += "</div></div>";
+            if(i%3 == 0){
+              tutorList += "</div>";
+            }
+          }
+          console.log(tutorList);
+          $(".container").html(tutorList);
+          let c = 1;
+          querySnapshot.forEach(function (doc) {
+            
+                var name = document.getElementById(c);
+                var price = document.getElementById("price"+c);
+                var subject = document.getElementById("subject"+c);
+                name.innerHTML = doc.data().name;
+                price.innerHTML = "Price: $" + doc.data().price + "/h";
+                subject.innerHTML = "Subject: " + doc.data().subject;
 
-          i++;
-        });
-        i == 0;
+                c++;
+          });
+          for(let count =1; count <=querySnapshot.size;count++){
+            $("#"+count).click(function (event) {
+                  event.preventDefault();
+                  queryString = document.getElementById(count);
+                  window.location.href = "./tutorProfile.html?tutor=" + queryString.innerHTML;
+            });
+          }
+          
       });
+    });
+//^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
 
+
+
+firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        console.log("Logged in as" + user);
+        document.getElementById('notifylogin').innerHTML = "LOGGED IN"; 
+        document.getElementById('login').innerHTML =" <a class='nav-link' href='./login.html' ></a>";
+        document.getElementById('logOut') = "<a class='nav-link logout' href='javascript:void(0)'>Logout</a>"
+      
+        
+        //document.getElementById('logout').innerHTML = "click to LOGOUT";
+ 
+ 
+      } else {
+        console.log("not logged in");
+        document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
+        document.getElementById('login').innerHTML="<a class='nav-link' href='./login.html' >Login</a>";
+        document.getElementById('logOut').innerHTML = "<a class='nav-link logout' href='javascript:void(0)'></a>"
+        
+
+      }
+    });
+
+
+
+   
+      $(".logout").click(function (event) {
+          event.preventDefault();
+          firebase.auth().signOut().then(function () {
+            console.log('logged out');
+          }).catch(function (error) {
+            console.log('error');
+            // An error happened.
+          });
+        });
   </script>
 
 </body>

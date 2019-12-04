@@ -8,7 +8,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <meta charset="utf-8" />
-    <title>Tutor Finder</title>
+    <title>Tutor Profile</title>
     <link rel="stylesheet" type="text/css" href="Style/Style.css" />
 
     <!------------------------------------------------------------------------------>
@@ -23,8 +23,8 @@
     <!------------------------------------------------------------------------------>
     <!-- Optional styles and scripts of your own                                  -->
     <!------------------------------------------------------------------------------>
-    <link rel="stylesheet" href="styles/style.css">
-    <script src="scripts/script.js"></script>
+    <!-- <link rel="stylesheet" href="styles/style.css">
+    <script src="scripts/script.js"></script> -->
 
     <script>
         // Your web app's Firebase configuration
@@ -65,27 +65,15 @@
                     <a class="nav-link" href="./tutorSelector.html">Find a Tutor<span
                             class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./login.html">Login</a>
+                <li class="nav-item" id="login" >
+                        <a class="nav-link" href="./login.html" >Login</a>
+                 </li>
+                 <li class="nav-item logout" id="logOut" >
+                   <a class='nav-link logout' href='javascript:void(0)'>Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <form class="form-inline">
-        <i class="fas fa-search" aria-hidden="true"></i>
-        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
-    </form>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Prefrences
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button class="dropdown-item" type="button">Price</button>
-            <button class="dropdown-item" type="button">Subject</button>
-        </div>
-    </div>
-    <div id="bob">
     <img src="Images/blank_pp.png" class="ppLarge">
     <h1><span id="name"></span></h1>
     <h5><span id="price"></span></h5>
@@ -94,38 +82,79 @@
     <h5><span id="contact"></span></h5>
     <!-- <input type="button" value="Book Appoitment" href="./Booking.html" /> -->
     <!-- <button class="nav-link" type="button" href="./Booking.html" >Book Appoitment</button> -->
-    <button type="button" class="btn btn-link"><a href="./Booking.html">Book Appoitment</a></button>
+    <button type="button" class="btn btn-link"><a id="bookbtn" href="./Booking.html">Book Appoitment</a></button>
+    <h3><span id="notifylogin"></span></h3>
+    <h6><span id="logout"></span></h6>
 
-    <h6>Reviews</h6>
-    <div>Great guy review comment</div>
-</div>
+
+
+    <!-- <h6>Reviews</h6>
+    <div>Great guy review comment</div> -->
 
     <script>
-        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-            .onSnapshot(function (c) {
-                // console.log("Current data: ", c.data());
-                document.getElementById("name").innerHTML = c.data().name;
+        var name = window.location.href//name = url 
+        var url = new URL(name); //pass url through URL obj
+        var query_string = url.search; //parse???
+        var search_params = new URLSearchParams(query_string);//pass thorugh URLsearchparams obj
+        var tutor = search_params.get('tutor');// get the tutor name
+        console.log(tutor);
+        document.getElementById("name").innerHTML = tutor;// show tutor name on page
+
+
+        db.collection("Tutors").where("name", "==", tutor)//when name = tutorname
+            .get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    // console.log("Current data: ", c.data());
+                    document.getElementById("price").innerHTML = "Price: $" + doc.data().price + "/h";
+                    document.getElementById("subject").innerHTML = "Subject: " + doc.data().subject;
+                    document.getElementById("rating").innerHTML = "Rating: " + doc.data().rating;
+                    document.getElementById("contact").innerHTML = "Contact: " + doc.data().contact;
+                })
             })
-        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-            .onSnapshot(function (c) {
-                // console.log("Current data: ", c.data());
-                document.getElementById("price").innerHTML = "Price: $" + c.data().price + "/h";
-            })
-        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-            .onSnapshot(function (c) {
-                // console.log("Current data: ", c.data());
-                document.getElementById("subject").innerHTML = "Subject: " + c.data().subject;
-            })
-        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-            .onSnapshot(function (c) {
-                // console.log("Current data: ", c.data());
-                document.getElementById("rating").innerHTML = "Rating: " + c.data().rating;
-            })
-        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-            .onSnapshot(function (c) {
-                // console.log("Current data: ", c.data());
-                document.getElementById("rating").innerHTML = "Contact: " + c.data().contact;
-            })
+
+        $("#bookbtn").click(function (event) {
+            event.preventDefault();
+            window.location.href = "./Booking.html?tutor=" + tutor;
+
+        });
+
+
+
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                console.log("Logged in as" + user);
+                document.getElementById('notifylogin').innerHTML = "LOGGED IN"; 
+                document.getElementById('login').innerHTML =" <a class='nav-link' href='./login.html' ></a>";
+                document.getElementById('logOut') = "<a class='nav-link logout' href='javascript:void(0)'>Logout</a>"
+      
+        
+        //document.getElementById('logout').innerHTML = "click to LOGOUT";
+ 
+ 
+            } else {
+                console.log("not logged in");
+                document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
+                document.getElementById('login').innerHTML="<a class='nav-link' href='./login.html' >Login</a>";
+                document.getElementById('logOut').innerHTML = "<a class='nav-link logout' href='javascript:void(0)'></a>"
+                
+
+            }
+        });
+
+
+
+
+        $(".logout").click(function (event) {
+        event.preventDefault();
+        firebase.auth().signOut().then(function () {
+          console.log('logged out');
+        }).catch(function (error) {
+          console.log('error');
+          // An error happened.
+        });
+      });
     </script>
 
 

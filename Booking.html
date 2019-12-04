@@ -1,180 +1,174 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
-    />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyDwW0SxAa7rQNtirqtI7U1UQkOAudflZWQ",
-        authDomain: "project-8839510588664178667.firebaseapp.com",
-        databaseURL: "https://project-8839510588664178667.firebaseio.com",
-        projectId: "project-8839510588664178667",
-        storageBucket: "project-8839510588664178667.appspot.com",
-        messagingSenderId: "1096535957963",
-        appId: "1:1096535957963:web:258193868d1cfda790964e",
-        measurementId: "G-WS6MMHK5X8"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      var db = firebase.firestore();
-    </script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
-    <meta charset="utf-8" />
-    <title>Booking Page</title>
-    <link rel="stylesheet" type="text/css" href="Style/Style.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="./index.html">
-        <img
-          src="Images/Logo.png"
-          width="30"
-          height="30"
-          class="d-inline-block align-top"
-          alt=""
-        />
-        Tutor Finder
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="./index.html"
-              >Home <span class="sr-only">(current)</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./tutorSelector.html">Find a Tutor</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./login.html">Login</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <form id="myform">
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="formGroupExampleInput">Tutor</label>
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Readonly input here…"
-            id="tutorName"
-            readonly
-          />
-        </div>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDwW0SxAa7rQNtirqtI7U1UQkOAudflZWQ",
+      authDomain: "project-8839510588664178667.firebaseapp.com",
+      databaseURL: "https://project-8839510588664178667.firebaseio.com",
+      projectId: "project-8839510588664178667",
+      storageBucket: "project-8839510588664178667.appspot.com",
+      messagingSenderId: "1096535957963",
+      appId: "1:1096535957963:web:258193868d1cfda790964e",
+      measurementId: "G-WS6MMHK5X8"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+  </script>
 
-        <div class="form-group col-md-2">
-          <label for="formGroupExampleInput">Price</label>
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Readonly input here…"
-            readonly
-            id="priceId"
-          />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="formGroupExampleInput">Subject</label>
-          <select class="form-control" id="formGroupExampleInput">
-            <option>Math </option
-            ><!-- Put in the subjects from the tutors profile-->
-          </select>
-        </div>
-        <div class="form-group col-md-4">
-          <label for="formGroupExampleInput2">Course</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" />
-        </div>
-        
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-2">
-          <label for="datePicker">Date</label>
-          <input type="date" id="datePicker" />
-        </div>
-        <div class="form-group col-md-4">
-            <label for="TimePicker">Time</label>
-            <input type="time" id="TimePicker" />
-          </div>
+  <meta charset="utf-8" />
+  <title>Booking Page</title>
+  <link rel="stylesheet" type="text/css" href="Style/Style.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="./index.html">
+      <img src="Images/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
+      Tutor Finder
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./tutorSelector.html">Find a Tutor</a>
+        </li>
+        <li class="nav-item" id="login" >
+            <a class="nav-link" href="./login.html" >Login</a>
+        </li>
+        <li class="nav-item logout" id="logOut" >
+           <a class='nav-link logout' href='javascript:void(0)'>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <form id="myform">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="formGroupExampleInput">Tutor</label>
+        <h3><span id="nameDisplay"></span></h3>
       </div>
 
-      <label for="formGroupExampleInput">Location</label>
-      <select class="form-control" id="locationInput">
-        <option>Math </option
-        ><!-- Put in the subjects from the tutors profile-->
-      </select>
-
-      <div class="form-row">
-        <div class="form-group col-md-3">
-          <label for="inputCity">City</label>
-          <input type="text" class="form-control" id="inputCity" />
-        </div>
-        <div class="form-group col-md-2">
-          <label for="inputState">State</label>
-          <select id="inputState" class="form-control">
-            <option selected>Choose...</option>
-            <option>...</option>
-          </select>
-        </div>
-        <div class="form-group col-md-2">
-          <label for="inputZip">Zip</label>
-          <input type="text" class="form-control" id="inputZip" />
-        </div>
+      <div class="form-group col-md-2">
+        <label for="formGroupExampleInput">Price</label>
+        <h3><span id="priceDisplay"></span></h3>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="formGroupExampleInput">Subject</label>
+        <select class="form-control" id="formGroupExampleInput">
+          <!-- <option>Math</option>Put in the subjects from the tutors profile -->
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="formGroupExampleInput2">Course</label>
+        <input type="text" class="form-control" id="formGroupExampleInput2" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="datePicker">Date*</label>
+        <input type="date" id="datePicker" />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="TimePicker">Time*</label>
+        <input type="time" id="TimePicker" />
+      </div>
+    </div>
+      <div class="form-group col-md-8">
+        <label for="formGroupExampleInput">Location*</label>
+        <select class="form-control" id="locationInput">
+          <option>Library </option>
+          <option>School </option>
+          <option>Community Center </option>
+          <option>Home </option><!-- Put in the subjects from the tutors profile-->
+        </select>
       </div>
 
-      <button type="submit" class="submit btn btn-primary">Submit</button>
-    </form>
+    <!-- <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" id="inputCity" />
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputState">State</label>
+        <select id="inputState" class="form-control">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input type="text" class="form-control" id="inputZip" />
+      </div>
+    </div> -->
 
-    <script>
-     
-      $("#myform").submit(function(event) {
-        event.preventDefault();
-        let tutor = $("#tutorName").val();
-        let price = $("#priceId").val();
-        let subject = $("#formGroupExampleInput").val();
-        let course = $("#formGroupExampleInput2").val();
-        let date = $("#datePicker").val();
-        let time = $("#TimePicker").val();
-        let location = $("#locationInput").val();
-        let city = $("#inputCity").val();
-        let state = $("#inputState").val();
-        let zip = $("#inputZip").val();
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <h3><span id="notifylogin"></span></h3>
+    <!-- <h6><span id="logout"></span></h6> -->
 
-        function setDatabase(_callback){
-          firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-              db.collection("appointments")
+
+  </form>
+
+  <script>
+    var name = window.location.href//name = url 
+    var url = new URL(name); //pass url through URL obj
+    var query_string = url.search; //parse???
+    var search_params = new URLSearchParams(query_string);//pass thorugh URLsearchparams obj
+    var tutorName = search_params.get('tutor');// get the tutor name
+    console.log(tutorName);
+    document.getElementById("nameDisplay").innerHTML = tutorName;// show tutor name on page
+
+    db.collection("Tutors").where("name", "==", tutorName)//when name = tutorname
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          // console.log("Current data: ", c.data());
+          document.getElementById("priceDisplay").innerHTML = doc.data().price + "/h";
+          document.getElementById("formGroupExampleInput").innerHTML = "<option>"+doc.data().subject+"</option>";
+        })
+      })
+    ////////////^^^^^^^^^^^DISPLAY NAME AND PRICE DEPENDEND ON URL VARIABLE NAME/^^^^^^^^^^^^^^^//////////
+
+    $("#myform").submit(function (event) {
+      event.preventDefault();
+      let tutor = tutorName;
+      let price = $("#priceDisplay").val();
+      let subject = $("#formGroupExampleInput").val();
+      let course = $("#formGroupExampleInput2").val();
+      let date = $("#datePicker").val();
+      let time = $("#TimePicker").val();
+      let location = $("#locationInput").val();
+      // let city = $("#inputCity").val();
+      // let state = $("#inputState").val();
+      // let zip = $("#inputZip").val();
+
+      function setDatabase(_callback) {
+        firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            db.collection("appointments")
               .doc()
               .set({
                 date: date,
@@ -186,35 +180,65 @@
                 subject: subject,
                 course: course,
               });
-              document.getElementById("myform").reset();
-            } else {
-              alert("please Log-in :)");
-              window.location.href = "./index.html"
-           }
-          });
-          _callback();
-       }
-        function locationChaange(){
-          setDatabase(function(){
-            //window.location.href = "./login.html";
-          });
-           
-        }
-        locationChaange();
+            document.getElementById("myform").reset();
+          } else {
+            alert("please Log-in :)");
+            window.location.href = "./index.html"
+          }
+        });
+        _callback();
+      }
+      function locationChaange() {
+        setDatabase(function () {
+          var div = $("#myform");
+          var htmlContent = "Submited Please return to the home page";
+          div.html(htmlContent);
+
+
+          //window.location.href = "./login.html";
+        });
+
+      }
+      locationChaange();
+
+
+
+    });
+
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+          console.log("Logged in as" + user);
+          document.getElementById('notifylogin').innerHTML = "LOGGED IN"; 
+          document.getElementById('login').innerHTML =" <a class='nav-link' href='./login.html' ></a>";
+          document.getElementById('logOut') = "<a class='nav-link logout' href='javascript:void(0)'>Logout</a>"
         
           
+          //document.getElementById('logout').innerHTML = "click to LOGOUT";
+  
+  
+        } else {
+          console.log("not logged in");
+          document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
+          document.getElementById('login').innerHTML="<a class='nav-link' href='./login.html' >Login</a>";
+          document.getElementById('logOut').innerHTML = "<a class='nav-link logout' href='javascript:void(0)'></a>"
           
+
+        }
+    });
+
+
+    $("#logout").click(function (event) {
+        event.preventDefault();
+        firebase.auth().signOut().then(function () {
+          console.log('logged out');
+        }).catch(function (error) {
+          console.log('error');
+          // An error happened.
+        });
       });
 
+  </script>
+</body>
 
-      firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            console.log("Logged in as"+ user);
-          } else {
-            console.log("not logged in");
-          }
-       });
-     
-    </script>
-  </body>
 </html>
