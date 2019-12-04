@@ -1,3 +1,4 @@
+
 body{
     background-color: #C6D8D3;
 }
@@ -64,6 +65,62 @@ margin-bottom: 15px;
     color: tomato;
 }
 
-#tutors-title{
+.small-title{
+    margin: 30px;
+    padding-left: 12px;
+    width: 230px;
+}
+
+.ppLarge{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    float: left;
+    margin: 20px;
+}
+
+
+#bob{
+    
+    background-color: #FDF0D5;
+    border: 1px black solid;
+    margin-left: 15px;
+    margin-right: 20px;
+    padding: 20px;
+    margin-top: 10px;   
+}
+
+#name{
+    color: tomato;
+}
+
+.navbar-brand{
+    float: left;
+}
+
+
+.form-control{
+    background-color: #FDF0D5;
+    width: 300px;
+}
+
+#TimePicker{
+    background-color: #FDF0D5;
+}
+
+#datePicker{
+    background-color: #FDF0D5;
+}
+
+.submit
+{
+    margin: 10px;
+}
+    #tutors-title{
+    margin-left: 30px;
+}
+
+#booking{
     margin-left: 30px;
 }
