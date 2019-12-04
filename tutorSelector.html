@@ -48,7 +48,7 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light ">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="./index.html">
       <img src="Images/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
       Tutor Finder
     </a>
@@ -87,28 +87,31 @@
   <h2 class="small-title">Tutors</h2>
   <div class="container">
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-lg-4 first">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="butn btn btn-link"><a href="./tutorProfile.html"><span id="name1"></span></a></button>
+        <button type="button" class="btn btn-link"><a id="first" href="./tutorProfile.html"><span
+              class="name"></span></a></button>
         <div class="bio">
-          <div><span id="price1"></span></div>
-          <div><span id="subject1"></span></div>
+          <div><span class="price"></span></div>
+          <div><span class="subject"></span></div>
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-4 second">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="butn btn btn-link"><span id="name2"></span></button>
+        <button type="button" class="btn btn-link"><a id="second" href="./tutorProfile.html"><span
+              class="name"></span></a></button>
         <div class="bio">
-          <div><span id="price2"></span></div>
-          <div><span id="subject2"></span></div>
+          <div><span class="price"></span></div>
+          <div><span class="subject"></span></div>
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-4 third">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="butn btn btn-link"><span id="name3"></span></button>
+        <button type="button" class="btn btn-link"><a id="third" href="./tutorProfile.html"><span
+              class="name"></span></a></button>
         <div class="bio">
-          <div><span id="price3"></span></div>
-          <div><span id="subject3"></span></div>
+          <div><span class="price"></span></div>
+          <div><span class="subject"></span></div>
         </div>
       </div>
     </div>
@@ -116,76 +119,26 @@
 
   <script>
 
+    var tutorsName = document.getElementsByClassName("name");
+    var tutorsPrice = document.getElementsByClassName("price");
+    var tutorsSubject = document.getElementsByClassName("subject");
+    i = 0;
     //first tutor 
-    db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("name1").innerHTML = c.data().name;
-      })
-    db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("price1").innerHTML = "Price: $" + c.data().price + "/h";
-      })
-    db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("subject1").innerHTML = "Subject: " + c.data().subject;
-      })
+    db.collection("Tutors")
+      .orderBy("rating")
+      .limit(3)
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          tutorsName[i].innerHTML = doc.data().name;
+          tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
+          tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
 
-    //second tutor
-    db.collection("Tutors").doc("gIijILYQZDqxVga5j6Bj")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("name2").innerHTML = c.data().name;
-      })
-    db.collection("Tutors").doc("gIijILYQZDqxVga5j6Bj")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("price2").innerHTML = "Price: $" + c.data().price + "/h";
-      })
-    db.collection("Tutors").doc("gIijILYQZDqxVga5j6Bj")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("subject2").innerHTML = "Subject: " + c.data().subject;
-      })
 
-    //third tutor
-    db.collection("Tutors").doc("FdV0PVNcHpKN23JZHNiN")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("name3").innerHTML = c.data().name;
-      })
-    db.collection("Tutors").doc("FdV0PVNcHpKN23JZHNiN")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("price3").innerHTML = "Price: $" + c.data().price + "/h";
-      })
-    db.collection("Tutors").doc("FdV0PVNcHpKN23JZHNiN")
-      .onSnapshot(function (c) {
-        // console.log("Current data: ", c.data());
-        document.getElementById("subject3").innerHTML = "Subject: " + c.data().subject;
-      })
-// function displayTutor() {
-//   db.collection("Tutors")
-//   .get() //getting collection of document
-//   .then(function(snap) { 
-//     console.log(snap);
-//     snap.forEach(function(doc) {
-//       console.log(doc.data());
-//       var n = doc.data().name;
-//       console.log(n);
-
-//       var para = document.createElement("div");
-//       document.body.appendChild(para);
-//       var node = document.createTextNode(node);
-//       para.appendChild(node);
-
-//     });
-
-//   });
-// }
-// displayTutors();
+          i++;
+        });
+        i == 0;
+      });
 
   </script>
 

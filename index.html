@@ -10,11 +10,46 @@
   <meta charset="utf-8" />
   <title>Landing Page</title>
   <link rel="stylesheet" type="text/css" href="Style/Style.css" />
+
+
+  <!------------------------------------------------------------------------------>
+  <!-- Add Firebase products that you want to use                               -->
+  <!------------------------------------------------------------------------------>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <!------------------------------------------------------------------------------>
+  <!-- Optional styles and scripts of your own                                  -->
+  <!------------------------------------------------------------------------------>
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="scripts/script.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDwW0SxAa7rQNtirqtI7U1UQkOAudflZWQ",
+      authDomain: "project-8839510588664178667.firebaseapp.com",
+      databaseURL: "https://project-8839510588664178667.firebaseio.com",
+      projectId: "project-8839510588664178667",
+      storageBucket: "project-8839510588664178667.appspot.com",
+      messagingSenderId: "1096535957963",
+      appId: "1:1096535957963:web:258193868d1cfda790964e",
+      measurementId: "G-WS6MMHK5X8"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+    var db = firebase.firestore();
+
+  </script>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="./index.html">
       <img src="Images/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
       Tutor Finder
     </a>
@@ -37,60 +72,148 @@
     </div>
   </nav>
   </div>
-  <div id="about-us">
-    <h2 id="about-title">About Us</h2>
-    <p>We created Tutor Finder to help the students who been having problems in finding tutors who would fit their
-      needs and to find the best possible person to further their understanding in whatever subject they’re struggling in.
-      We’re dedicated in fixing this issue and helping our fellow students on their academic journeys.</p>
-  </div>
-  
 
-  <h2 class="small-title">Tutors</h2>
+
+  <h2 id="tutors-title">Top 3 Tutors</h2>
   <div class="container">
-      <form class="form-inline">
-          <i class="fas fa-search" aria-hidden="true"></i>
-          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
-        </form>
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Prefrences
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button class="dropdown-item" type="button">Price</button>
-            <button class="dropdown-item" type="button">Subject</button>
-          </div>
-         </div>
+    <form class="form-inline">
+      <i class="fas fa-search" aria-hidden="true"></i>
+      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
+    </form>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Prefrences
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button">Price</button>
+        <button class="dropdown-item" type="button">Subject</button>
+      </div>
+    </div>
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-lg-4 first">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="butn btn btn-link" >Bob</button>
+        <button type="button" class="btn btn-link"><a id="first" href="./tutorProfile.html"><span class="name"></span></a></button>
         <div class="bio">
-          <div>Price: $25/h</div>
-          <div>Subjects: Math, Science</div>
+          <div><span class="price"></span></div>
+          <div><span class="subject"></span></div>
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-4 second">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class="butn btn btn-link" >Joe</button>
+        <button type="button" class="btn btn-link"><a id="second"href="./tutorProfile.html"><span class="name"></span></a></button>
         <div class="bio">
-          <div>Price: $30/h</div>
-          <div>Subjects: Socials, English</div>
+          <div><span class="price"></span></div>
+          <div><span class="subject"></span></div>
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-4 third">
         <img src="Images/blank_pp.png" class="pp">
-        <button type="button" class=" butn btn btn-link" >Jim</button>
+        <button type="button" class="btn btn-link"><a id="third" href="./tutorProfile.html"><span class="name"></span></a></button>
         <div class="bio">
-          <div>Price: $25/h</div>
-          <div>Subjects: French, Spansish</div>
+          <div><span class="price"></span></div>
+          <div><span class="subject"></span></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <h2 class="small-title">Appointments</h2>
+    <h2>Appoitments</h2>
+    <!-- tells user log in to see appoitmnets-->
+    <!-- displays appoitmnets -->
+    <div>
+      <table id="appoitments" style="width:100%;">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Tutor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>a1</td>
+            <td>a2</td>
+            <td>a3</td>
+            <td>a4</td>
+          </tr>
+          <tr>
+            <td>b1</td>
+            <td>b2</td>
+            <td>b3</td>
+            <td>b4</td>
+          </tr>
+          <tr>
+            <td>c1</td>
+            <td>c2</td>
+            <td>c3</td>
+            <td>c4</td>
+          </tr>
+        </tbody>
+      </table>
 
+    </div>
+
+
+
+    <div id="about-us">
+      <h2 id="about-title">About Us</h2>
+      <p>We created Tutor Finder to help the students who been having problems in finding tutors who would fit their
+        needs
+        and to find the best possible person to further their understanding in whatever subject they’re struggling
+        in.<br>
+        We’re dedicated in fixing this issue and helping our fellow students on their academic journeys.</p>
+    </div>
+
+
+
+
+    <script>
+      var tutorsName = document.getElementsByClassName("name");
+      var tutorsPrice = document.getElementsByClassName("price");
+      var tutorsSubject = document.getElementsByClassName("subject");
+      i = 0;
+      //first tutor 
+      db.collection("Tutors")
+        .orderBy("rating")
+        .limit(3)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            tutorsName[i].innerHTML = doc.data().name;
+            tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
+            tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
+              i++;
+          });
+          i == 0;
+        });
+
+        $("#first").click(function(event){
+          event.preventDefault();
+          queryString = document.getElementsByClassName("name");
+          
+          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+
+
+        });
+        $("#second").click(function(event){
+          event.preventDefault();
+          queryString = document.getElementsByClassName("name");
+          
+          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+
+
+        });
+        $("#third").click(function(event){
+          event.preventDefault();
+          queryString = document.getElementsByClassName("name");
+          
+          window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
+
+
+        });
+
+     </script>
 </body>
 
 </html>

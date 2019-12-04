@@ -47,8 +47,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light ">
-        <a class="navbar-brand" href="#">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="./index.html">
             <img src="Images/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
             Tutor Finder
         </a>
@@ -66,7 +66,7 @@
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="./login.html">Login</a>
                 </li>
             </ul>
         </div>
@@ -91,7 +91,11 @@
     <h5><span id="price"></span></h5>
     <h5><span id="subject"></span></h5>
     <h5><span id="rating"></span></h5>
-    <input type="button" value="Book Appoitment" />
+    <h5><span id="contact"></span></h5>
+    <!-- <input type="button" value="Book Appoitment" href="./Booking.html" /> -->
+    <!-- <button class="nav-link" type="button" href="./Booking.html" >Book Appoitment</button> -->
+    <button type="button" class="btn btn-link"><a href="./Booking.html">Book Appoitment</a></button>
+
     <h6>Reviews</h6>
     <div>Great guy review comment</div>
 </div>
@@ -116,6 +120,11 @@
             .onSnapshot(function (c) {
                 // console.log("Current data: ", c.data());
                 document.getElementById("rating").innerHTML = "Rating: " + c.data().rating;
+            })
+        db.collection("Tutors").doc("JROwhxxphyBjyuVjf51T")
+            .onSnapshot(function (c) {
+                // console.log("Current data: ", c.data());
+                document.getElementById("rating").innerHTML = "Contact: " + c.data().contact;
             })
     </script>
 
