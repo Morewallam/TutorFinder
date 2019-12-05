@@ -48,7 +48,8 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light">
+  <!-- Nav bar -->
+  <nav class="navbar navbar-expand-lg navbar-light min-vh-50">
     <a class="navbar-brand" href="./index.html">
       <img src="Images/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
       Tutor Finder
@@ -76,7 +77,7 @@
   </nav>
   </div>
 
-
+  <!-- Top tutors -->
   <h2 id="tutors-title">Top 3 Tutors</h2>
   <div class="container">
     <form class="form-inline">
@@ -84,9 +85,9 @@
       <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
     </form>
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+      <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        Prefrences
+        Preferences
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
         <button class="dropdown-item" type="button">Price</button>
@@ -123,7 +124,7 @@
       </div>
     </div>
 
-    <h2>Appoitments</h2>
+    <h2>Appointments</h2>
     <!-- tells user log in to see appoitmnets-->
     <!-- displays appoitmnets -->
     <h3><span id="notifylogin"></span></h3>
@@ -170,7 +171,7 @@
 
     <h6><span id="logout"></span></h6>
 
-
+    <!-- displays a message about us -->
     <div id="about-us">
       <h2 id="about-title">About Us</h2>
       <p>We created Tutor Finder to help the students who been having problems in finding tutors who would fit their
@@ -182,127 +183,23 @@
 
 
 
-
+    <script src="scripts/pageScripts.js"></script>
     <script>
       $(document).ready(function() {
-        var tutorsName = document.getElementsByClassName("name");
-        var tutorsPrice = document.getElementsByClassName("price");
-        var tutorsSubject = document.getElementsByClassName("subject");
-        i = 0;
-        //first tutor 
-        db.collection("Tutors")
-          .orderBy("rating")
-          .limit(3)
-          .get()
-          .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-              tutorsName[i].innerHTML = doc.data().name;
-              tutorsPrice[i].innerHTML = "Price: $" + doc.data().price + "/h";
-              tutorsSubject[i].innerHTML = "Subject: " + doc.data().subject;
-                i++;
-            });
-            i == 0;
-          });
-
-
-          $("#first").click(function(event){
-            event.preventDefault();
-            queryString = document.getElementsByClassName("name");     
-            window.location.href = "./tutorProfile.html?tutor=" + queryString[0].innerHTML;
-          });
-          $("#second").click(function(event){
-            event.preventDefault();
-            queryString = document.getElementsByClassName("name");
-            window.location.href = "./tutorProfile.html?tutor=" + queryString[1].innerHTML;
-          });
-          $("#third").click(function(event){
-            event.preventDefault();
-            queryString = document.getElementsByClassName("name");
-            window.location.href = "./tutorProfile.html?tutor=" + queryString[2].innerHTML;
-          });
+        indexTutors();
+       
         });
 
-          //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
-          firebase.auth().onAuthStateChanged(function(user) {
-            var appointName = document.getElementsByClassName("tutor");
-            var appointDate = document.getElementsByClassName("date");
-            var appointLoc = document.getElementsByClassName("location");
-            var appointTime = document.getElementsByClassName("time");
-            let i = 0;
-            db.collection("appointments").where("student","==", user.uid)
-            .limit(3)
-            .get()
-            .then(function (querySnapshot) {
-              querySnapshot.forEach(function (doc) {
-                console.log(user.uid);
+      //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
 
-                console.log(appointName);
-                console.log(appointDate);
-                console.log(appointLoc);
-                console.log(appointTime);
-                console.log(doc.data().tutor, doc.data().date,doc.data().location,doc.data().time )
+        // dispay appointments for the user.
+        firebase.auth().onAuthStateChanged(function(user) {
 
-                appointName[i].innerHTML = doc.data().tutor;
-                appointDate[i].innerHTML = doc.data().date;
-                appointLoc[i].innerHTML = doc.data().location;
-                appointTime[i].innerHTML = doc.data().time;
-                i++;
-                // console.log(doc.data().tutor, doc.data().date,doc.data().location,doc.data().time )
-              });
-              i == 0;
-            })
-            .catch(function(error){
-              console.log("Error getting documents: ", error);
-            });
-          });
-
-
-      firebase.auth().onAuthStateChanged(function (user) {
-          if (user) {
-          console.log("Logged in as" + user);
-          document.getElementById('notifylogin').innerHTML = "LOGGED IN"; 
-          document.getElementById('login').innerHTML =" <a class='nav-link' href='./login.html' ></a>";
-          document.getElementById('logOut') = "<a class='nav-link logout' href='javascript:void(0)'>Logout</a>"
-        
           
-          //document.getElementById('logout').innerHTML = "click to LOGOUT";
-  
-  
-        } else {
-          console.log("not logged in");
-          document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
-          document.getElementById('login').innerHTML="<a class='nav-link' href='./login.html' >Login</a>";
-          document.getElementById('logOut').innerHTML = "<a class='nav-link logout' href='javascript:void(0)'></a>"
+          indexAppointments(user);
           
-
-        }
-      });
-
-
-      $(".logout").click(function (event) {
-        event.preventDefault();
-        firebase.auth().signOut().then(function () {
-          console.log('logged out');
-        }).catch(function (error) {
-          console.log('error');
-          // An error happened.
         });
-      });
 
-      // .where("student", "==", user.id)
-      // firebase.auth().onAuthStateChanged(function (user) {
-      //   db.collection("appointments")
-      //     .get()
-      //     .then(function (querySnapshot) {
-      //       querySnapshot.forEach(function (doc) {
-      //         console.log(user.uid);
-      //         console.log(doc.data().location);
-      //         // console.log(user.uid);
-      //         // console.log(user.uid);
-      //         // console.log(user.uid);
-      //       })
-      //     })
-      //   })
 
 
     </script>

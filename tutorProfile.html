@@ -47,6 +47,7 @@
 </head>
 
 <body>
+    <!-- nav bar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="./index.html">
             <img src="Images/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
@@ -74,6 +75,7 @@
             </ul>
         </div>
     </nav>
+    <!-- the profile data for the tutor -->
     <img src="Images/blank_pp.png" class="ppLarge">
     <div id="bob">
     <h1><span id="name"></span></h1>
@@ -91,71 +93,10 @@
 
     <!-- <h6>Reviews</h6>
     <div>Great guy review comment</div> -->
-
+    <script src="scripts/pageScripts.js"></script>
     <script>
-        var name = window.location.href//name = url 
-        var url = new URL(name); //pass url through URL obj
-        var query_string = url.search; //parse???
-        var search_params = new URLSearchParams(query_string);//pass thorugh URLsearchparams obj
-        var tutor = search_params.get('tutor');// get the tutor name
-        console.log(tutor);
-        document.getElementById("name").innerHTML = tutor;// show tutor name on page
+        profile();
 
-
-        db.collection("Tutors").where("name", "==", tutor)//when name = tutorname
-            .get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    // console.log("Current data: ", c.data());
-                    document.getElementById("price").innerHTML = "Price: $" + doc.data().price + "/h";
-                    document.getElementById("subject").innerHTML = "Subject: " + doc.data().subject;
-                    document.getElementById("rating").innerHTML = "Rating: " + doc.data().rating;
-                    document.getElementById("contact").innerHTML = "Contact: " + doc.data().contact;
-                })
-            })
-
-        $("#bookbtn").click(function (event) {
-            event.preventDefault();
-            window.location.href = "./Booking.html?tutor=" + tutor;
-
-        });
-
-
-
-
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                console.log("Logged in as" + user);
-                document.getElementById('notifylogin').innerHTML = "LOGGED IN"; 
-                document.getElementById('login').innerHTML =" <a class='nav-link' href='./login.html' ></a>";
-                document.getElementById('logOut') = "<a class='nav-link logout' href='javascript:void(0)'>Logout</a>"
-      
-        
-        //document.getElementById('logout').innerHTML = "click to LOGOUT";
- 
- 
-            } else {
-                console.log("not logged in");
-                document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
-                document.getElementById('login').innerHTML="<a class='nav-link' href='./login.html' >Login</a>";
-                document.getElementById('logOut').innerHTML = "<a class='nav-link logout' href='javascript:void(0)'></a>"
-                
-
-            }
-        });
-
-
-
-
-        $(".logout").click(function (event) {
-        event.preventDefault();
-        firebase.auth().signOut().then(function () {
-          console.log('logged out');
-        }).catch(function (error) {
-          console.log('error');
-          // An error happened.
-        });
-      });
     </script>
 
 

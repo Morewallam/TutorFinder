@@ -37,7 +37,7 @@
 </head>
 
 <body>
-  
+  <!-- The nav bar of the page -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="./index.html">
       <img src="Images/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
@@ -64,6 +64,7 @@
       </ul>
     </div>
   </nav>
+  <!-- The forum for booking appointments -->
   <div id="booking">
   <form id="myform">
     <div class="form-row">
@@ -109,136 +110,16 @@
         </select>
       </div>
 
-    <!-- <div class="form-row">
-      <div class="form-group col-md-3">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" id="inputCity" />
-      </div>
-      <div class="form-group col-md-2">
-        <label for="inputState">State</label>
-        <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="form-group col-md-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" id="inputZip" />
-      </div>
-    </div> -->
-
     <button type="submit" class="btn btn-primary" id="dropdownMenu2">Submit</button>
     <h3><span id="notifylogin"></span></h3>
     <!-- <h6><span id="logout"></span></h6> -->
   </div>
 
   </form>
-
+  <script src="scripts/pageScripts.js"></script>
   <script>
-    var name = window.location.href//name = url 
-    var url = new URL(name); //pass url through URL obj
-    var query_string = url.search; //parse???
-    var search_params = new URLSearchParams(query_string);//pass thorugh URLsearchparams obj
-    var tutorName = search_params.get('tutor');// get the tutor name
-    console.log(tutorName);
-    document.getElementById("nameDisplay").innerHTML = tutorName;// show tutor name on page
 
-    db.collection("Tutors").where("name", "==", tutorName)//when name = tutorname
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          // console.log("Current data: ", c.data());
-          document.getElementById("priceDisplay").innerHTML = doc.data().price + "/h";
-          document.getElementById("formGroupExampleInput").innerHTML = "<option>"+doc.data().subject+"</option>";
-        })
-      })
-    ////////////^^^^^^^^^^^DISPLAY NAME AND PRICE DEPENDEND ON URL VARIABLE NAME/^^^^^^^^^^^^^^^//////////
-
-    $("#myform").submit(function (event) {
-      event.preventDefault();
-      let tutor = tutorName;
-      let price = $("#priceDisplay").val();
-      let subject = $("#formGroupExampleInput").val();
-      let course = $("#formGroupExampleInput2").val();
-      let date = $("#datePicker").val();
-      let time = $("#TimePicker").val();
-      let location = $("#locationInput").val();
-      // let city = $("#inputCity").val();
-      // let state = $("#inputState").val();
-      // let zip = $("#inputZip").val();
-
-      function setDatabase(_callback) {
-        firebase.auth().onAuthStateChanged(function (user) {
-          if (user) {
-            db.collection("appointments")
-              .doc()
-              .set({
-                date: date,
-                location: location,
-                price: price,
-                student: user.uid,
-                time: time,
-                tutor: tutor,
-                subject: subject,
-                course: course,
-              });
-            document.getElementById("myform").reset();
-          } else {
-            alert("please Log-in :)");
-            window.location.href = "./index.html"
-          }
-        });
-        _callback();
-      }
-      function locationChaange() {
-        setDatabase(function () {
-          var div = $("#myform");
-          var htmlContent = "Submited Please return to the home page";
-          div.html(htmlContent);
-
-
-          //window.location.href = "./login.html";
-        });
-
-      }
-      locationChaange();
-
-
-
-    });
-
-
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-          console.log("Logged in as" + user);
-          document.getElementById('notifylogin').innerHTML = "LOGGED IN"; 
-          document.getElementById('login').innerHTML =" <a class='nav-link' href='./login.html' ></a>";
-          document.getElementById('logOut') = "<a class='nav-link logout' href='javascript:void(0)'>Logout</a>"
-        
-          
-          //document.getElementById('logout').innerHTML = "click to LOGOUT";
-  
-  
-        } else {
-          console.log("not logged in");
-          document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
-          document.getElementById('login').innerHTML="<a class='nav-link' href='./login.html' >Login</a>";
-          document.getElementById('logOut').innerHTML = "<a class='nav-link logout' href='javascript:void(0)'></a>"
-          
-
-        }
-    });
-
-
-    $("#logout").click(function (event) {
-        event.preventDefault();
-        firebase.auth().signOut().then(function () {
-          console.log('logged out');
-        }).catch(function (error) {
-          console.log('error');
-          // An error happened.
-        });
-      });
+    booking();
 
   </script>
 </body>
