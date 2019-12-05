@@ -101,11 +101,21 @@
   <script>
     $(document).ready(function(){
       selector();
+      authentication();
+
     });
 //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
-
+      // dispay appointments for the user.
+      firebase.auth().onAuthStateChanged(function(user) {
+        
+        
+          
+        });
+        
 
   </script>
+  <script src="./Scripts/authenticationScript.js"></script>
+
 
 </body>
 
