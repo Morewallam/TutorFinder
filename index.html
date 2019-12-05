@@ -186,26 +186,26 @@
 
 
 
-    <script src="scripts/pageScripts.js"></script>
     <script>
       $(document).ready(function() {
-        indexTutors();
+        document.promise().indexTutors();
        
         });
-
-      //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
+        
+        //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
 
         // dispay appointments for the user.
         firebase.auth().onAuthStateChanged(function(user) {
-
+          
           
           indexAppointments(user);
           
         });
-
-
-
-    </script>
+        
+        
+        
+        </script>
+        <script src="scripts/pageScripts.js"></script>
 </body>
 
 </html>
