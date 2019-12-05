@@ -6,7 +6,7 @@
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         console.log("Logged in as" + user);
-        document.getElementById('notifylogin').innerHTML = "LOGGED IN"; 
+        document.getElementById('notifylogin').innerHTML = "you are LOGGED IN"; 
         document.getElementById('login').innerHTML ="";
         document.getElementById('logOut').innerHTML =  "<a class='nav-link logout' href='javascript:void(0)'>Logout</a>";
     } else {
@@ -19,7 +19,7 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 });
   
-$(".logout").click(function (event) {
+$("#logout").click(function (event) {
     event.preventDefault();
     firebase.auth().signOut().then(function () {
       console.log('logged out');
