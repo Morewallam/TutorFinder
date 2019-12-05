@@ -15,6 +15,7 @@
 //         document.getElementById('notifylogin').innerHTML = "LOGIN to book appoitments";
 //         document.getElementById('login').innerHTML="<a class='nav-link' href='./login.html' >Login</a>";
 //         document.getElementById('logOut').innerHTML = ""
+//testssssssssssssssssssssssssssssssssssssssssssssssssssssss
             
   
 //   }
