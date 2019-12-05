@@ -191,15 +191,16 @@
       <script>
         $(document).ready(function() {
         indexTutors();
-       
-        });
+        authentication();
         
-        //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
-
-        // dispay appointments for the user.
-        firebase.auth().onAuthStateChanged(function(user) {
-          
-          
+      });
+      
+      //^^^^^^^^^^^^^^^^^^^^^^ASSIGNS PROPER TUTOR NAME VARIABLE TO URL DEPENDING ON NAME CLICKED^^^^^^^^^^^^^^^^^^^^
+      
+      // dispay appointments for the user.
+      firebase.auth().onAuthStateChanged(function(user) {
+        
+        
         indexAppointments(user);
           
         });
@@ -207,6 +208,9 @@
         
         
         </script>
+
+<script src="./Scripts/authenticationScript.js"></script>
+
 </body>
 
 </html>
