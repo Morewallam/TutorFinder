@@ -67,7 +67,7 @@
                     <a class="nav-link" href="./tutorSelector.html">Find a Tutor</a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="#" style="color: red;">Profile(Work in progress)</a>
                 </li>
                 <li class="nav-item" id="login" >
                       <a class="nav-link" href="./login.html" >Login</a>
@@ -78,20 +78,24 @@
             </ul>
         </div>
     </nav>
-
     <br>
     <br>
     <br>
     <!-- the login container and loader -->
     <div id="firebaseui-auth-container"></div>
     <div id="loader">Loading...</div>
-    <h3><span id="notifylogin"></span></h3>
     <h6><span class="logout"></span></h6>
+    <h3><span id="notifylogin" style="visibility: hidden;"></span></h3>
 
     <script src="./Scripts/pageScripts.js"></script>
     <script>
         loginUI();//the ui for letting the user login.
+        $(document).ready(function() {
+        
         authentication();
+        
+      });
+        
 
 
 

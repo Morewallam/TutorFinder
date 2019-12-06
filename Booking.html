@@ -64,6 +64,8 @@
       </ul>
     </div>
   </nav>
+  <h3><span id="notifyloginSide"></span></h3>
+  <h3><span id="notifylogin" style="color: red; "></span></h3>
   <!-- The forum for booking appointments -->
   <div id="booking">
   <form id="myform">
@@ -118,10 +120,15 @@
   </form>
   <script src="scripts/pageScripts.js"></script>
   <script>
-
+     $(document).ready(function() {
+        
+        authentication();
+        
+      });
     booking();
 
   </script>
+  <script src="./Scripts/authenticationScript.js"></script>
 </body>
 
 </html>

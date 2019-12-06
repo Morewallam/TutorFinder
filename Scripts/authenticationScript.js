@@ -7,7 +7,7 @@ function authentication(){
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             console.log("Logged in as" + user);
-            document.getElementById('notifylogin').innerHTML = "you are LOGGED IN"; 
+            document.getElementById('notifyloginSide').innerHTML = "Hello " + user.displayName; 
             document.getElementById('login').innerHTML ="";
             document.getElementById('logOut').innerHTML =  "<a class='nav-link logout' href='javascript:void(0)'>Logout</a>";
         } else {
